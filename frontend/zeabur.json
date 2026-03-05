@@ -1,0 +1,10 @@
+{
+  "name": "noah-portfolio-frontend",
+  "framework": "create-react-app",
+  "buildCommand": "yarn build",
+  "outputDirectory": "build",
+  "installCommand": "yarn install",
+  "environment": {
+    "REACT_APP_BACKEND_URL": "${REACT_APP_BACKEND_URL}"
+  }
+}

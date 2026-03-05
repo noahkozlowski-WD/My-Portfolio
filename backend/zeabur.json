@@ -1,0 +1,14 @@
+{
+  "name": "noah-portfolio-backend",
+  "buildCommand": "pip install -r requirements.txt",
+  "startCommand": "bash start.sh",
+  "environment": {
+    "MONGO_URL": "${MONGO_URL}",
+    "DB_NAME": "${DB_NAME}",
+    "PORT": "${PORT}"
+  },
+  "healthCheck": {
+    "path": "/api/",
+    "interval": 30
+  }
+}

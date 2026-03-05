@@ -1,0 +1,4 @@
+# Uploads directory for user-uploaded images
+# This directory stores profile photos and service images
+*
+!.gitkeep
