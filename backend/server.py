@@ -41,11 +41,6 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# Add a root health check for Zeabur proxy
-@app.get("/")
-async def health_check():
-    return {"status": "ok", "message": "Backend is running!"}
-
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
@@ -88,14 +83,14 @@ app.include_router(admin_content_router)
 # Serve uploaded files
 app.mount("/uploads", StaticFiles(directory="/app/backend/uploads"), name="uploads")
 
-# Simplified CORS configuration: allow all origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=".*",
     allow_credentials=True,
+    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
