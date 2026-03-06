@@ -112,14 +112,16 @@ const About = () => {
       style={{ padding: isMobile ? '80px 0' : '120px 0', overflow: 'hidden', ...sectionAccentStyle }}
     >
       {/* Parallax glow */}
-      <div data-parallax-glow="" style={{
-        position: 'absolute', top: '20%', right: '5%',
-        width: 450, height: 450,
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 60%)',
-        pointerEvents: 'none',
-        willChange: 'transform',
-      }} />
+      {!isMobile && (
+        <div data-parallax-glow="" style={{
+          position: 'absolute', top: '20%', right: '5%',
+          width: 450, height: 450,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 60%)',
+          pointerEvents: 'none',
+          willChange: 'transform',
+        }} />
+      )}
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
 

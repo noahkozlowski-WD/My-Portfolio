@@ -536,12 +536,13 @@ body>div:last-child:not(#root):not(.App) {
   overflow: hidden;
 }
 
-/* Reduced blur on smaller screens to massively improve scroll performance */
+/* Removed blur entirely on smaller screens to flawlessly support older GPUs */
 @media (max-width: 768px) {
   .card-glass {
-    backdrop-filter: blur(4px) saturate(160%);
-    -webkit-backdrop-filter: blur(4px) saturate(160%);
-    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(20, 20, 20, 0.85);
+    /* Slightly darker to compensate for lack of blur */
   }
 }
 

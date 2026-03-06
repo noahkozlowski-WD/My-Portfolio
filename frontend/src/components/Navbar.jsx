@@ -11,7 +11,6 @@ const Navbar = () => {
   const navRef = useRef(null);
   const lastScrollY = useRef(0);
   const [hidden, setHidden] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   const navLinks = [
     { name: 'About', id: 'about' },
@@ -42,10 +41,13 @@ const Navbar = () => {
       }
       lastScrollY.current = currentY;
 
-      // Scroll Progress logic
+      // Extreme mobile optimization: Bypass React State to update width directly
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       const progress = totalScroll > 0 ? (currentY / totalScroll) * 100 : 0;
-      setScrollProgress(progress);
+      const progressBar = document.getElementById('scroll-progress-bar');
+      if (progressBar) {
+        progressBar.style.width = `${progress}%`;
+      }
 
       ticking = false;
     };
@@ -122,18 +124,18 @@ const Navbar = () => {
         zIndex: 50,
         transition: 'background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s',
         background: isScrolled || isMobileMenuOpen ? (isMobile ? 'rgba(10, 10, 10, 0.95)' : 'rgba(10, 10, 10, 0.85)') : 'transparent',
-        backdropFilter: isScrolled || isMobileMenuOpen ? (isMobile ? 'blur(8px) saturate(150%)' : 'blur(20px) saturate(180%)') : 'none',
-        WebkitBackdropFilter: isScrolled || isMobileMenuOpen ? (isMobile ? 'blur(8px) saturate(150%)' : 'blur(20px) saturate(180%)') : 'none',
+        backdropFilter: isScrolled || isMobileMenuOpen ? (isMobile ? 'none' : 'blur(20px) saturate(180%)') : 'none',
+        WebkitBackdropFilter: isScrolled || isMobileMenuOpen ? (isMobile ? 'none' : 'blur(20px) saturate(180%)') : 'none',
         borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
         willChange: 'transform, background-color',
       }}>
-      {/* Global Scroll Progress Bar */}
-      <div style={{
+      {/* Global Scroll Progress Bar (Updated outside React) */}
+      <div id="scroll-progress-bar" style={{
         position: 'absolute',
         top: 0, left: 0, right: 0,
         height: 2,
         background: `linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-skills) 100%)`,
-        width: `${scrollProgress}%`,
+        width: '0%',
         transition: 'width 0.1s ease-out',
         zIndex: 51,
       }} />

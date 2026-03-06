@@ -145,14 +145,16 @@ const Services = () => {
       style={{ padding: isMobile ? '80px 0' : '120px 0', overflow: 'hidden', ...sectionAccentStyle }}
     >
       {/* Parallax glow */}
-      <div data-parallax-glow="" style={{
-        position: 'absolute', bottom: '10%', left: '5%',
-        width: 400, height: 400,
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(217, 70, 239, 0.04) 0%, transparent 60%)',
-        pointerEvents: 'none',
-        willChange: 'transform',
-      }} />
+      {!isMobile && (
+        <div data-parallax-glow="" style={{
+          position: 'absolute', bottom: '10%', left: '5%',
+          width: 400, height: 400,
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(217, 70, 239, 0.04) 0%, transparent 60%)',
+          pointerEvents: 'none',
+          willChange: 'transform',
+        }} />
+      )}
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
 
