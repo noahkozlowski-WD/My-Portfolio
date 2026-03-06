@@ -204,7 +204,7 @@ const Hero = () => {
           transform: 'translate(-50%, -50%)',
           width: 'min(550px, 80vw)', height: 'min(550px, 80vw)',
           borderRadius: '50%',
-          border: '1px solid rgba(191, 0, 255, 0.07)',
+          border: '1px solid rgba(191, 0, 255, 0.15)',
         }} />
         {/* Orbital ring 2 — medium, tilted */}
         <div data-orbit="2" style={{
@@ -212,7 +212,7 @@ const Hero = () => {
           transform: 'translate(-50%, -50%) rotate(60deg)',
           width: 'min(420px, 62vw)', height: 'min(420px, 62vw)',
           borderRadius: '50%',
-          border: '1px dashed rgba(168, 85, 247, 0.08)',
+          border: '1px dashed rgba(168, 85, 247, 0.16)',
         }} />
         {/* Orbital ring 3 — small */}
         <div data-orbit="3" style={{
@@ -220,7 +220,7 @@ const Hero = () => {
           transform: 'translate(-50%, -50%) rotate(-30deg)',
           width: 'min(300px, 45vw)', height: 'min(300px, 45vw)',
           borderRadius: '50%',
-          border: '1px solid rgba(217, 70, 239, 0.06)',
+          border: '1px solid rgba(217, 70, 239, 0.12)',
         }} />
 
         {/* Floating dots */}
@@ -233,8 +233,8 @@ const Hero = () => {
               width: dot.size, height: dot.size,
               borderRadius: '50%',
               background: 'var(--accent-primary)',
-              opacity: 0.15 + (i % 3) * 0.05,
-              boxShadow: `0 0 ${dot.size * 2}px rgba(191, 0, 255, 0.3)`,
+              opacity: 0.3 + (i % 3) * 0.1,
+              boxShadow: `0 0 ${dot.size * 2}px rgba(191, 0, 255, 0.5)`,
             }}
           />
         ))}
@@ -248,7 +248,7 @@ const Hero = () => {
             style={{
               position: 'absolute', left: sym.x, top: sym.y,
               fontSize: sym.size, color: 'var(--accent-primary)',
-              opacity: 0.12, transform: `rotate(${sym.rotate}deg)`,
+              opacity: 0.25, transform: `rotate(${sym.rotate}deg)`,
               fontWeight: 600, userSelect: 'none',
             }}
           >
@@ -257,17 +257,17 @@ const Hero = () => {
         ))}
 
         {/* Hexagon */}
-        <svg data-float-code="" style={{ position: 'absolute', left: '25%', top: '22%', width: 40, height: 40, opacity: 0.08 }} viewBox="0 0 40 40">
+        <svg data-float-code="" style={{ position: 'absolute', left: '25%', top: '22%', width: 40, height: 40, opacity: 0.2 }} viewBox="0 0 40 40">
           <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="none" stroke="var(--accent-primary)" strokeWidth="1.5" />
         </svg>
 
         {/* Diamond */}
-        <svg data-float-dot="" style={{ position: 'absolute', right: '22%', bottom: '28%', width: 30, height: 30, opacity: 0.1 }} viewBox="0 0 30 30">
+        <svg data-float-dot="" style={{ position: 'absolute', right: '22%', bottom: '28%', width: 30, height: 30, opacity: 0.25 }} viewBox="0 0 30 30">
           <rect x="4" y="4" width="22" height="22" fill="none" stroke="var(--accent-secondary)" strokeWidth="1.5" transform="rotate(45 15 15)" />
         </svg>
 
         {/* Triangle */}
-        <svg data-float-code="" style={{ position: 'absolute', left: '72%', top: '18%', width: 35, height: 35, opacity: 0.07 }} viewBox="0 0 35 35">
+        <svg data-float-code="" style={{ position: 'absolute', left: '72%', top: '18%', width: 35, height: 35, opacity: 0.18 }} viewBox="0 0 35 35">
           <polygon points="17.5,3 32,30 3,30" fill="none" stroke="var(--accent-tertiary)" strokeWidth="1.5" />
         </svg>
       </div>
