@@ -83,39 +83,14 @@ app.include_router(admin_content_router)
 # Serve uploaded files
 app.mount("/uploads", StaticFiles(directory="/app/backend/uploads"), name="uploads")
 
-# Parse CORS origins
-cors_origins_str = os.environ.get('CORS_ORIGINS', '*')
-
-if cors_origins_str == '*':
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origin_regex=".*", # Safe way to allow all origins with credentials
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-else:
-    origins = [origin.strip() for origin in cors_origins_str.split(',')]
-    
-    # Always ensure both apex and www domains are allowed, regardless of env var
-    default_origins = [
-        "https://noahkozlowski.com",
-        "https://www.noahkozlowski.com",
-        "http://localhost:3000",
-        "http://localhost:5173"
-    ]
-    for d in default_origins:
-        if d not in origins:
-            origins.append(d)
-
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-
+# Simplified CORS configuration: allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=".*",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
