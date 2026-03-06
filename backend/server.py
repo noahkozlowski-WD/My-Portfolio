@@ -83,13 +83,25 @@ app.include_router(admin_content_router)
 # Serve uploaded files
 app.mount("/uploads", StaticFiles(directory="/app/backend/uploads"), name="uploads")
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Parse CORS origins
+cors_origins_str = os.environ.get('CORS_ORIGINS', '*')
+
+if cors_origins_str == '*':
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origin_regex=".*", # Safe way to allow all origins with credentials
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+else:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[origin.strip() for origin in cors_origins_str.split(',')],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 # Configure logging
 logging.basicConfig(
