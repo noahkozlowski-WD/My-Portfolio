@@ -276,25 +276,7 @@ const About = () => {
                 <path d="M0 30 H15 V28 H2 V15 H0 V30 Z" fill={VIOLET} />
               </svg>
 
-              {/* Floating Code Badge */}
-              <div style={{
-                position: 'absolute',
-                top: 30,
-                left: -20,
-                background: 'rgba(10,10,10,0.85)',
-                backdropFilter: 'blur(8px)',
-                padding: '6px 14px',
-                borderRadius: 8,
-                border: '1px solid rgba(139, 92, 246, 0.2)',
-                boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
-                zIndex: 3,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-              }}>
-                <div style={{ width: 6, height: 6, borderRadius: '50%', background: VIOLET, boxShadow: `0 0 8px ${VIOLET}` }} />
-                <span className="font-mono" style={{ fontSize: '0.75rem', color: VIOLET, letterSpacing: '0.05em' }}>_active</span>
-              </div>
+
 
               {/* Image Container */}
               <div style={{
@@ -345,6 +327,7 @@ const About = () => {
                   bottom: 16,
                   left: 16,
                   right: 16,
+                  zIndex: 5,
                 }}
               >
                 {STATS.map(({ value, label }) => (
