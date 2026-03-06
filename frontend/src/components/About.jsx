@@ -8,8 +8,8 @@ import makeSectionAccent from '../utils/makeSectionAccent';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ────── Accent ────── */
-const INDIGO = '#6366f1';
-const sectionAccentStyle = makeSectionAccent(99, 102, 241);
+const VIOLET = '#8b5cf6';
+const sectionAccentStyle = makeSectionAccent(139, 92, 246);
 
 const TRAITS = [
   { label: 'Problem Solver', emoji: '⚡' },
@@ -116,7 +116,7 @@ const About = () => {
         position: 'absolute', top: '20%', right: '5%',
         width: 450, height: 450,
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 60%)',
+        background: 'radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 60%)',
         pointerEvents: 'none',
         willChange: 'transform',
       }} />
@@ -126,7 +126,7 @@ const About = () => {
         {/* Header */}
         <div ref={headerRef} style={{ opacity: 0, marginBottom: isMobile ? 40 : 64 }}>
           <p className="font-mono" style={{
-            color: INDIGO,
+            color: VIOLET,
             fontSize: '0.8rem',
             fontWeight: 500,
             letterSpacing: '0.15em',
@@ -142,7 +142,7 @@ const About = () => {
           }}>
             <span style={{ color: 'var(--text-primary)' }}>About </span>
             <span style={{
-              background: `linear-gradient(135deg, ${INDIGO}, #818cf8)`,
+              background: `linear-gradient(135deg, ${VIOLET}, #a78bfa)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -167,7 +167,7 @@ const About = () => {
                   width: 3,
                   height: 28,
                   borderRadius: 2,
-                  background: `linear-gradient(to bottom, ${INDIGO}, #4f46e5)`,
+                  background: `linear-gradient(to bottom, ${VIOLET}, #7c3aed)`,
                 }} />
                 <h3 className="font-heading" style={{
                   fontSize: '1.2rem',
@@ -194,7 +194,7 @@ const About = () => {
                   width: 3,
                   height: 28,
                   borderRadius: 2,
-                  background: `linear-gradient(to bottom, #4f46e5, #3730a3)`,
+                  background: `linear-gradient(to bottom, #7c3aed, #5b21b6)`,
                 }} />
                 <h3 className="font-heading" style={{
                   fontSize: '1.1rem',
@@ -227,18 +227,18 @@ const About = () => {
                     borderRadius: 999,
                     fontSize: '0.82rem',
                     fontWeight: 500,
-                    color: INDIGO,
-                    background: 'rgba(99, 102, 241, 0.06)',
-                    border: '1px solid rgba(99, 102, 241, 0.12)',
+                    color: VIOLET,
+                    background: 'rgba(139, 92, 246, 0.06)',
+                    border: '1px solid rgba(139, 92, 246, 0.12)',
                     transition: 'all 0.3s',
                     cursor: 'default',
                   }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.3)';
-                    e.currentTarget.style.boxShadow = '0 0 15px rgba(99, 102, 241, 0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.3)';
+                    e.currentTarget.style.boxShadow = '0 0 15px rgba(139, 92, 246, 0.1)';
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.12)';
+                    e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.12)';
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
@@ -321,7 +321,7 @@ const About = () => {
                       style={{
                         fontSize: '1.5rem',
                         fontWeight: 700,
-                        color: INDIGO,
+                        color: VIOLET,
                         marginBottom: 2,
                       }}
                     >

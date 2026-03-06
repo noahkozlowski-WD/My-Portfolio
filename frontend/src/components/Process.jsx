@@ -8,8 +8,8 @@ import makeSectionAccent from '../utils/makeSectionAccent';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ────── Accent ────── */
-const TEAL = '#14b8a6';
-const sectionAccentStyle = makeSectionAccent(20, 184, 166);
+const FUCHSIA = '#e879f9';
+const sectionAccentStyle = makeSectionAccent(232, 121, 249);
 
 const steps = [
   {
@@ -133,7 +133,7 @@ const Process = () => {
           left: 24,
           right: 24,
           height: 2,
-          background: `linear-gradient(to right, ${TEAL}, rgba(20, 184, 166, 0.3), rgba(20, 184, 166, 0.1))`,
+          background: `linear-gradient(to right, ${FUCHSIA}, rgba(232, 121, 249, 0.3), rgba(232, 121, 249, 0.1))`,
           transformOrigin: 'left center',
           borderRadius: 1,
           zIndex: 0,
@@ -169,14 +169,14 @@ const Process = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: `linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(52, 211, 153, 0.15))`,
-                border: `2px solid rgba(20, 184, 166, 0.25)`,
-                boxShadow: `0 0 15px rgba(20, 184, 166, 0.1), inset 0 0 15px rgba(20, 184, 166, 0.05)`,
+                background: `linear-gradient(135deg, rgba(232, 121, 249, 0.15), rgba(52, 211, 153, 0.15))`,
+                border: `2px solid rgba(232, 121, 249, 0.25)`,
+                boxShadow: `0 0 15px rgba(232, 121, 249, 0.1), inset 0 0 15px rgba(232, 121, 249, 0.05)`,
                 transition: 'all 0.3s',
                 zIndex: 2,
                 backdropFilter: 'blur(4px)',
               }}>
-                <IconComponent size={18} style={{ color: TEAL }} />
+                <IconComponent size={18} style={{ color: FUCHSIA }} />
               </div>
 
               {/* Compact card */}
@@ -189,7 +189,7 @@ const Process = () => {
                 <span className="font-mono" style={{
                   fontSize: '0.7rem',
                   fontWeight: 600,
-                  color: TEAL,
+                  color: FUCHSIA,
                   opacity: 0.5,
                   display: 'block',
                   marginBottom: 8,
@@ -225,21 +225,21 @@ const Process = () => {
                   gap: 6,
                   padding: '5px 12px',
                   borderRadius: 8,
-                  background: `rgba(20, 184, 166, 0.05)`,
-                  border: `1px solid rgba(20, 184, 166, 0.1)`,
+                  background: `rgba(232, 121, 249, 0.05)`,
+                  border: `1px solid rgba(232, 121, 249, 0.1)`,
                 }}>
                   <div style={{
                     width: 5,
                     height: 5,
                     borderRadius: '50%',
-                    background: TEAL,
-                    boxShadow: `0 0 6px ${TEAL}`,
+                    background: FUCHSIA,
+                    boxShadow: `0 0 6px ${FUCHSIA}`,
                     flexShrink: 0,
                   }} />
                   <p className="font-body" style={{
                     fontSize: '0.7rem',
                     fontWeight: 500,
-                    color: TEAL,
+                    color: FUCHSIA,
                   }}>
                     {step.result}
                   </p>
@@ -266,7 +266,7 @@ const Process = () => {
           top: 24,
           bottom: 24,
           width: 2,
-          background: `linear-gradient(to bottom, ${TEAL}, rgba(20, 184, 166, 0.3), rgba(20, 184, 166, 0.1))`,
+          background: `linear-gradient(to bottom, ${FUCHSIA}, rgba(232, 121, 249, 0.3), rgba(232, 121, 249, 0.1))`,
           transformOrigin: 'top center',
           borderRadius: 1,
         }}
@@ -295,12 +295,12 @@ const Process = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: `linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(52, 211, 153, 0.15))`,
-                  border: `2px solid rgba(20, 184, 166, 0.2)`,
-                  boxShadow: `0 0 15px rgba(20, 184, 166, 0.1), inset 0 0 15px rgba(20, 184, 166, 0.05)`,
+                  background: `linear-gradient(135deg, rgba(232, 121, 249, 0.15), rgba(52, 211, 153, 0.15))`,
+                  border: `2px solid rgba(232, 121, 249, 0.2)`,
+                  boxShadow: `0 0 15px rgba(232, 121, 249, 0.1), inset 0 0 15px rgba(232, 121, 249, 0.05)`,
                   transition: 'all 0.3s',
                 }}>
-                  <IconComponent size={18} style={{ color: TEAL }} />
+                  <IconComponent size={18} style={{ color: FUCHSIA }} />
                 </div>
               </div>
 
@@ -328,7 +328,7 @@ const Process = () => {
                   <span className="font-mono" style={{
                     fontSize: '0.75rem',
                     fontWeight: 600,
-                    color: TEAL,
+                    color: FUCHSIA,
                     flexShrink: 0,
                     opacity: 0.6,
                   }}>
@@ -353,21 +353,21 @@ const Process = () => {
                   gap: 8,
                   padding: '6px 14px',
                   borderRadius: 8,
-                  background: `rgba(20, 184, 166, 0.05)`,
-                  border: `1px solid rgba(20, 184, 166, 0.1)`,
+                  background: `rgba(232, 121, 249, 0.05)`,
+                  border: `1px solid rgba(232, 121, 249, 0.1)`,
                 }}>
                   <div style={{
                     width: 6,
                     height: 6,
                     borderRadius: '50%',
-                    background: TEAL,
-                    boxShadow: `0 0 6px ${TEAL}`,
+                    background: FUCHSIA,
+                    boxShadow: `0 0 6px ${FUCHSIA}`,
                     flexShrink: 0,
                   }} />
                   <p className="font-body" style={{
                     fontSize: '0.78rem',
                     fontWeight: 500,
-                    color: TEAL,
+                    color: FUCHSIA,
                   }}>
                     {step.result}
                   </p>
@@ -392,7 +392,7 @@ const Process = () => {
         {/* Header */}
         <div ref={headerRef} style={{ opacity: 0, textAlign: 'center', marginBottom: 72 }}>
           <p className="font-mono" style={{
-            color: TEAL,
+            color: FUCHSIA,
             fontSize: '0.8rem',
             fontWeight: 500,
             letterSpacing: '0.15em',
@@ -409,7 +409,7 @@ const Process = () => {
           }}>
             <span style={{ color: 'var(--text-primary)' }}>A Simple, </span>
             <span style={{
-              background: `linear-gradient(135deg, ${TEAL}, #2dd4bf)`,
+              background: `linear-gradient(135deg, ${FUCHSIA}, #f0abfc)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',

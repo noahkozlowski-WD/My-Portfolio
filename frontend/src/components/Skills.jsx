@@ -9,8 +9,8 @@ import makeSectionAccent from '../utils/makeSectionAccent';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ────── Accent ────── */
-const BLUE = '#3b82f6';
-const sectionAccentStyle = makeSectionAccent(59, 130, 246);
+const INDIGO = '#6366f1';
+const sectionAccentStyle = makeSectionAccent(99, 102, 241);
 
 const iconMap = { Code2, Database, Settings, Palette };
 
@@ -53,7 +53,7 @@ const Skills = () => {
         {/* Header */}
         <div ref={headerRef} style={{ opacity: 0, textAlign: 'center', marginBottom: isMobile ? 40 : 64 }}>
           <p className="font-mono" style={{
-            color: BLUE,
+            color: INDIGO,
             fontSize: '0.8rem',
             fontWeight: 500,
             letterSpacing: '0.15em',
@@ -70,7 +70,7 @@ const Skills = () => {
           }}>
             <span style={{ color: 'var(--text-primary)' }}>My </span>
             <span style={{
-              background: `linear-gradient(135deg, ${BLUE}, #60a5fa)`,
+              background: `linear-gradient(135deg, ${INDIGO}, #818cf8)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -83,9 +83,9 @@ const Skills = () => {
             gap: 12,
             marginBottom: 16,
           }}>
-            <div style={{ height: 1, width: 48, background: `linear-gradient(to right, transparent, ${BLUE})` }} />
-            <div style={{ width: 6, height: 6, borderRadius: '50%', background: BLUE, boxShadow: `0 0 8px ${BLUE}` }} />
-            <div style={{ height: 1, width: 48, background: `linear-gradient(to left, transparent, ${BLUE})` }} />
+            <div style={{ height: 1, width: 48, background: `linear-gradient(to right, transparent, ${INDIGO})` }} />
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: INDIGO, boxShadow: `0 0 8px ${INDIGO}` }} />
+            <div style={{ height: 1, width: 48, background: `linear-gradient(to left, transparent, ${INDIGO})` }} />
           </div>
           <p className="font-body" style={{
             color: 'var(--text-muted)',
@@ -127,10 +127,10 @@ const Skills = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: `linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(96, 165, 250, 0.1))`,
-                  border: `1px solid rgba(59, 130, 246, 0.15)`,
+                  background: `linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(129, 140, 248, 0.1))`,
+                  border: `1px solid rgba(99, 102, 241, 0.15)`,
                 }}>
-                  <IconComponent size={22} style={{ color: BLUE }} />
+                  <IconComponent size={22} style={{ color: INDIGO }} />
                 </div>
 
                 {/* Title */}
@@ -153,9 +153,9 @@ const Skills = () => {
                         borderRadius: 999,
                         fontSize: '0.72rem',
                         fontWeight: 500,
-                        color: BLUE,
-                        background: 'rgba(59, 130, 246, 0.06)',
-                        border: '1px solid rgba(59, 130, 246, 0.1)',
+                        color: INDIGO,
+                        background: 'rgba(99, 102, 241, 0.06)',
+                        border: '1px solid rgba(99, 102, 241, 0.1)',
                       }}
                     >
                       {tech}

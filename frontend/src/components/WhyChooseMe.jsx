@@ -88,7 +88,7 @@ const WhyChooseMe = () => {
         left: '5%',
         width: 400,
         height: 400,
-        background: 'radial-gradient(circle, rgba(139, 92, 246, 0.04) 0%, transparent 60%)',
+        background: 'radial-gradient(circle, rgba(168, 85, 247, 0.04) 0%, transparent 60%)',
         pointerEvents: 'none',
         willChange: 'transform',
       }} />
@@ -167,7 +167,7 @@ const WhyChooseMe = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: 'linear-gradient(135deg, rgba(191, 0, 255, 0.12), rgba(139, 92, 246, 0.12))',
+                  background: 'linear-gradient(135deg, rgba(191, 0, 255, 0.12), rgba(168, 85, 247, 0.12))',
                   border: '1px solid rgba(191, 0, 255, 0.15)',
                 }}>
                   <IconComponent size={isMobile ? 18 : 22} style={{ color: 'var(--accent-primary)' }} />

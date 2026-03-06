@@ -38,17 +38,17 @@
   --glow-strong: 0 0 30px rgba(191, 0, 255, 0.3), 0 0 80px rgba(191, 0, 255, 0.1);
 
   /* Section accent colors - Cyber Core Flow */
-  --accent-about: #6366f1;
+  --accent-about: #8b5cf6;
   /* Indigo */
-  --accent-skills: #3b82f6;
+  --accent-skills: #6366f1;
   /* Royal Blue */
-  --accent-services: #06b6d4;
+  --accent-services: #d946ef;
   /* Electric Cyan */
-  --accent-process: #14b8a6;
+  --accent-process: #e879f9;
   /* Teal */
-  --accent-why: #8b5cf6;
+  --accent-why: #a855f7;
   /* Deep Purple */
-  --accent-contact: #d946ef;
+  --accent-contact: #f43f5e;
   /* Magenta */
 
   /* ShadCN overrides */

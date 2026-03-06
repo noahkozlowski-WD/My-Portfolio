@@ -10,50 +10,50 @@ gsap.registerPlugin(ScrollTrigger);
 /* ────── Inline SVG illustrations ────── */
 const WebsiteSVG = () => (
   <svg width="64" height="64" viewBox="0 0 64 64" fill="none" style={{ opacity: 0.45 }}>
-    <rect x="4" y="8" width="56" height="42" rx="4" stroke="#3b82f6" strokeWidth="1.5" />
-    <line x1="4" y1="18" x2="60" y2="18" stroke="#3b82f6" strokeWidth="1" opacity="0.5" />
+    <rect x="4" y="8" width="56" height="42" rx="4" stroke="#d946ef" strokeWidth="1.5" />
+    <line x1="4" y1="18" x2="60" y2="18" stroke="#d946ef" strokeWidth="1" opacity="0.5" />
     <circle cx="11" cy="13" r="2" fill="#f43f5e" opacity="0.6" />
     <circle cx="17" cy="13" r="2" fill="#f59e0b" opacity="0.6" />
     <circle cx="23" cy="13" r="2" fill="#10b981" opacity="0.6" />
-    <rect x="10" y="24" width="22" height="2" rx="1" fill="#3b82f6" opacity="0.4" />
-    <rect x="10" y="30" width="16" height="2" rx="1" fill="#3b82f6" opacity="0.25" />
-    <rect x="10" y="36" width="20" height="2" rx="1" fill="#3b82f6" opacity="0.25" />
-    <rect x="38" y="24" width="16" height="16" rx="2" stroke="#3b82f6" strokeWidth="1" opacity="0.3" />
-    <text x="32" y="58" textAnchor="middle" fill="#3b82f6" fontSize="6" fontFamily="JetBrains Mono, monospace" opacity="0.3">{"</>"}</text>
+    <rect x="10" y="24" width="22" height="2" rx="1" fill="#d946ef" opacity="0.4" />
+    <rect x="10" y="30" width="16" height="2" rx="1" fill="#d946ef" opacity="0.25" />
+    <rect x="10" y="36" width="20" height="2" rx="1" fill="#d946ef" opacity="0.25" />
+    <rect x="38" y="24" width="16" height="16" rx="2" stroke="#d946ef" strokeWidth="1" opacity="0.3" />
+    <text x="32" y="58" textAnchor="middle" fill="#d946ef" fontSize="6" fontFamily="JetBrains Mono, monospace" opacity="0.3">{"</>"}</text>
   </svg>
 );
 
 const MobileSVG = () => (
   <svg width="48" height="64" viewBox="0 0 48 64" fill="none" style={{ opacity: 0.45 }}>
-    <rect x="8" y="4" width="32" height="56" rx="6" stroke="#3b82f6" strokeWidth="1.5" />
-    <line x1="8" y1="14" x2="40" y2="14" stroke="#3b82f6" strokeWidth="1" opacity="0.3" />
-    <line x1="8" y1="50" x2="40" y2="50" stroke="#3b82f6" strokeWidth="1" opacity="0.3" />
-    <rect x="14" y="20" width="20" height="10" rx="2" stroke="#3b82f6" strokeWidth="1" opacity="0.3" />
-    <rect x="14" y="34" width="9" height="9" rx="2" stroke="#3b82f6" strokeWidth="1" opacity="0.25" />
-    <rect x="26" y="34" width="9" height="9" rx="2" stroke="#3b82f6" strokeWidth="1" opacity="0.25" />
-    <circle cx="24" cy="55" r="3" stroke="#3b82f6" strokeWidth="1" opacity="0.25" />
+    <rect x="8" y="4" width="32" height="56" rx="6" stroke="#d946ef" strokeWidth="1.5" />
+    <line x1="8" y1="14" x2="40" y2="14" stroke="#d946ef" strokeWidth="1" opacity="0.3" />
+    <line x1="8" y1="50" x2="40" y2="50" stroke="#d946ef" strokeWidth="1" opacity="0.3" />
+    <rect x="14" y="20" width="20" height="10" rx="2" stroke="#d946ef" strokeWidth="1" opacity="0.3" />
+    <rect x="14" y="34" width="9" height="9" rx="2" stroke="#d946ef" strokeWidth="1" opacity="0.25" />
+    <rect x="26" y="34" width="9" height="9" rx="2" stroke="#d946ef" strokeWidth="1" opacity="0.25" />
+    <circle cx="24" cy="55" r="3" stroke="#d946ef" strokeWidth="1" opacity="0.25" />
   </svg>
 );
 
 const SeoSVG = () => (
   <svg width="64" height="56" viewBox="0 0 64 56" fill="none" style={{ opacity: 0.45 }}>
-    <line x1="8" y1="48" x2="56" y2="48" stroke="#3b82f6" strokeWidth="1" opacity="0.3" />
-    <rect x="12" y="36" width="8" height="12" rx="1" fill="#3b82f6" opacity="0.15" />
-    <rect x="24" y="28" width="8" height="20" rx="1" fill="#3b82f6" opacity="0.2" />
-    <rect x="36" y="18" width="8" height="30" rx="1" fill="#3b82f6" opacity="0.25" />
-    <rect x="48" y="10" width="8" height="38" rx="1" fill="#3b82f6" opacity="0.3" />
-    <polyline points="14,34 28,26 40,16 52,8" stroke="#3b82f6" strokeWidth="1.5" fill="none" opacity="0.5" />
-    <circle cx="52" cy="8" r="3" fill="#3b82f6" opacity="0.4" />
+    <line x1="8" y1="48" x2="56" y2="48" stroke="#d946ef" strokeWidth="1" opacity="0.3" />
+    <rect x="12" y="36" width="8" height="12" rx="1" fill="#d946ef" opacity="0.15" />
+    <rect x="24" y="28" width="8" height="20" rx="1" fill="#d946ef" opacity="0.2" />
+    <rect x="36" y="18" width="8" height="30" rx="1" fill="#d946ef" opacity="0.25" />
+    <rect x="48" y="10" width="8" height="38" rx="1" fill="#d946ef" opacity="0.3" />
+    <polyline points="14,34 28,26 40,16 52,8" stroke="#d946ef" strokeWidth="1.5" fill="none" opacity="0.5" />
+    <circle cx="52" cy="8" r="3" fill="#d946ef" opacity="0.4" />
   </svg>
 );
 
 const ConversionSVG = () => (
   <svg width="64" height="48" viewBox="0 0 64 48" fill="none" style={{ opacity: 0.45 }}>
-    <path d="M12 4 L52 4 L42 18 L22 18 Z" stroke="#3b82f6" strokeWidth="1.2" fill="#3b82f6" fillOpacity="0.05" />
-    <path d="M22 20 L42 20 L38 32 L26 32 Z" stroke="#3b82f6" strokeWidth="1.2" fill="#3b82f6" fillOpacity="0.08" />
-    <path d="M26 34 L38 34 L35 44 L29 44 Z" stroke="#3b82f6" strokeWidth="1.2" fill="#3b82f6" fillOpacity="0.12" />
-    <circle cx="32" cy="46" r="2" fill="#3b82f6" opacity="0.5" />
-    <line x1="32" y1="44" x2="32" y2="46" stroke="#3b82f6" strokeWidth="1" opacity="0.4" />
+    <path d="M12 4 L52 4 L42 18 L22 18 Z" stroke="#d946ef" strokeWidth="1.2" fill="#d946ef" fillOpacity="0.05" />
+    <path d="M22 20 L42 20 L38 32 L26 32 Z" stroke="#d946ef" strokeWidth="1.2" fill="#d946ef" fillOpacity="0.08" />
+    <path d="M26 34 L38 34 L35 44 L29 44 Z" stroke="#d946ef" strokeWidth="1.2" fill="#d946ef" fillOpacity="0.12" />
+    <circle cx="32" cy="46" r="2" fill="#d946ef" opacity="0.5" />
+    <line x1="32" y1="44" x2="32" y2="46" stroke="#d946ef" strokeWidth="1" opacity="0.4" />
   </svg>
 );
 
@@ -92,8 +92,8 @@ const SERVICES = [
 ];
 
 /* ────── Accent colors ────── */
-const BLUE = '#3b82f6';
-const sectionAccentStyle = makeSectionAccent(59, 130, 246);
+const MAGENTA = '#d946ef';
+const sectionAccentStyle = makeSectionAccent(217, 70, 239);
 
 const Services = () => {
   const sectionRef = useRef(null);
@@ -149,7 +149,7 @@ const Services = () => {
         position: 'absolute', bottom: '10%', left: '5%',
         width: 400, height: 400,
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.04) 0%, transparent 60%)',
+        background: 'radial-gradient(circle, rgba(217, 70, 239, 0.04) 0%, transparent 60%)',
         pointerEvents: 'none',
         willChange: 'transform',
       }} />
@@ -159,7 +159,7 @@ const Services = () => {
         {/* Header */}
         <div ref={headerRef} style={{ opacity: 0, marginBottom: isMobile ? 40 : 64 }}>
           <p className="font-mono" style={{
-            color: BLUE,
+            color: MAGENTA,
             fontSize: '0.8rem',
             fontWeight: 500,
             letterSpacing: '0.15em',
@@ -176,7 +176,7 @@ const Services = () => {
           }}>
             <span style={{ color: 'var(--text-primary)' }}>Everything </span>
             <span style={{
-              background: `linear-gradient(135deg, ${BLUE}, #60a5fa)`,
+              background: `linear-gradient(135deg, ${MAGENTA}, #e879f9)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -232,9 +232,9 @@ const Services = () => {
                 style={{
                   ...gridStyle,
                   background: isHero
-                    ? `linear-gradient(145deg, rgba(59, 130, 246, 0.06), rgba(96, 165, 250, 0.04), var(--bg-card))`
+                    ? `linear-gradient(145deg, rgba(217, 70, 239, 0.06), rgba(96, 165, 250, 0.04), var(--bg-card))`
                     : 'var(--bg-card)',
-                  border: `1px solid ${isActive ? `rgba(59, 130, 246, 0.3)` : 'var(--border-subtle)'}`,
+                  border: `1px solid ${isActive ? `rgba(217, 70, 239, 0.3)` : 'var(--border-subtle)'}`,
                   borderRadius: 20,
                   padding: isMobile ? 24 : (isHero ? 36 : (isFullWidth ? '28px 36px' : 28)),
                   display: 'flex',
@@ -242,7 +242,7 @@ const Services = () => {
                   gap: (!isMobile && isFullWidth) ? 32 : 16,
                   cursor: 'default',
                   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                  boxShadow: isActive ? `0 0 20px rgba(59, 130, 246, 0.15), 0 0 60px rgba(59, 130, 246, 0.05)` : 'none',
+                  boxShadow: isActive ? `0 0 20px rgba(217, 70, 239, 0.15), 0 0 60px rgba(217, 70, 239, 0.05)` : 'none',
                   transform: isActive ? 'translateY(-4px)' : 'none',
                   position: 'relative',
                   overflow: 'hidden',
@@ -283,19 +283,19 @@ const Services = () => {
                       alignItems: 'center',
                       justifyContent: 'center',
                       background: isHero
-                        ? `linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.15))`
-                        : `rgba(59, 130, 246, 0.08)`,
-                      border: `1px solid ${isHero ? `rgba(59, 130, 246, 0.2)` : `rgba(59, 130, 246, 0.1)`}`,
+                        ? `linear-gradient(135deg, rgba(217, 70, 239, 0.15), rgba(96, 165, 250, 0.15))`
+                        : `rgba(217, 70, 239, 0.08)`,
+                      border: `1px solid ${isHero ? `rgba(217, 70, 239, 0.2)` : `rgba(217, 70, 239, 0.1)`}`,
                       transition: 'all 0.3s',
                     }}>
-                      <Icon size={isMobile ? 18 : 20} style={{ color: BLUE }} />
+                      <Icon size={isMobile ? 18 : 20} style={{ color: MAGENTA }} />
                     </div>
                     <span className="font-mono" style={{
                       fontSize: '0.65rem',
                       fontWeight: 600,
                       letterSpacing: '0.12em',
                       textTransform: 'uppercase',
-                      color: BLUE,
+                      color: MAGENTA,
                       opacity: 0.7,
                     }}>
                       {tag}
@@ -339,9 +339,9 @@ const Services = () => {
                           padding: '5px 12px',
                           borderRadius: 999,
                           fontWeight: 500,
-                          color: BLUE,
-                          background: `rgba(59, 130, 246, 0.06)`,
-                          border: `1px solid rgba(59, 130, 246, 0.1)`,
+                          color: MAGENTA,
+                          background: `rgba(217, 70, 239, 0.06)`,
+                          border: `1px solid rgba(217, 70, 239, 0.1)`,
                         }}
                       >
                         {p}
