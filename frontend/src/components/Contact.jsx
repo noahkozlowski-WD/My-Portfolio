@@ -181,11 +181,11 @@ const Contact = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      background: 'rgba(244, 63, 94, 0.06)',
-                      border: '1px solid rgba(244, 63, 94, 0.1)',
+                      background: 'rgba(191, 0, 255, 0.06)',
+                      border: '1px solid rgba(191, 0, 255, 0.1)',
                       flexShrink: 0,
                     }}>
-                      <Icon size={18} style={{ color: ROSE }} />
+                      <Icon size={18} style={{ color: NEON_PURPLE }} />
                     </div>
                     <div>
                       <p className="font-mono" style={{
@@ -407,7 +407,7 @@ const Contact = () => {
                   padding: '14px 24px',
                   opacity: isSubmitting ? 0.6 : 1,
                   cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                  background: `linear-gradient(135deg, ${ROSE}, #fb7185)`,
+                  background: `linear-gradient(135deg, ${NEON_PURPLE}, #d946ef)`,
                 }}
               >
                 {isSubmitting ? 'Sending...' : (
@@ -421,7 +421,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 
