@@ -95,9 +95,22 @@ if cors_origins_str == '*':
         allow_headers=["*"],
     )
 else:
+    origins = [origin.strip() for origin in cors_origins_str.split(',')]
+    
+    # Always ensure both apex and www domains are allowed, regardless of env var
+    default_origins = [
+        "https://noahkozlowski.com",
+        "https://www.noahkozlowski.com",
+        "http://localhost:3000",
+        "http://localhost:5173"
+    ]
+    for d in default_origins:
+        if d not in origins:
+            origins.append(d)
+
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=[origin.strip() for origin in cors_origins_str.split(',')],
+        allow_origins=origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
