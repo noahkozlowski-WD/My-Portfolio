@@ -41,6 +41,11 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Add a root health check for Zeabur proxy
+@app.get("/")
+async def health_check():
+    return {"status": "ok", "message": "Backend is running!"}
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
