@@ -13,8 +13,8 @@ import makeSectionAccent from '../utils/makeSectionAccent';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ────── Accent ────── */
-const ROSE = '#f43f5e';
-const sectionAccentStyle = makeSectionAccent(244, 63, 94);
+const NEON_PURPLE = '#bf00ff';
+const sectionAccentStyle = makeSectionAccent(191, 0, 255);
 
 const BACKEND_URL = 'https://backend-noah.zeabur.app';
 const API = `${BACKEND_URL}/api`;
@@ -118,7 +118,7 @@ const Contact = () => {
         {/* Header */}
         <div ref={headerRef} style={{ opacity: 0, textAlign: 'center', marginBottom: isMobile ? 40 : 64 }}>
           <p className="font-mono" style={{
-            color: ROSE,
+            color: NEON_PURPLE,
             fontSize: '0.8rem',
             fontWeight: 500,
             letterSpacing: '0.15em',
@@ -133,7 +133,7 @@ const Contact = () => {
             letterSpacing: '-0.02em',
           }}>
             <span style={{
-              background: `linear-gradient(135deg, ${ROSE}, #fb7185)`,
+              background: `linear-gradient(135deg, ${NEON_PURPLE}, #d946ef)`,
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -208,7 +208,7 @@ const Contact = () => {
                             textDecoration: 'none',
                             transition: 'color 0.2s',
                           }}
-                          onMouseEnter={e => e.target.style.color = ROSE}
+                          onMouseEnter={e => e.target.style.color = NEON_PURPLE}
                           onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}
                         >
                           {value}
@@ -228,8 +228,8 @@ const Contact = () => {
             <div style={{
               borderRadius: 16,
               padding: 28,
-              background: 'linear-gradient(135deg, rgba(244, 63, 94, 0.08), rgba(251, 113, 133, 0.08))',
-              border: '1px solid rgba(244, 63, 94, 0.12)',
+              background: 'linear-gradient(135deg, rgba(191, 0, 255, 0.08), rgba(217, 70, 239, 0.08))',
+              border: '1px solid rgba(191, 0, 255, 0.12)',
             }}>
               <h3 className="font-heading" style={{
                 fontSize: '1.15rem',
@@ -267,19 +267,19 @@ const Contact = () => {
                       justifyContent: 'center',
                       fontSize: '0.7rem',
                       fontWeight: 600,
-                      color: ROSE,
-                      background: 'rgba(244, 63, 94, 0.06)',
-                      border: '1px solid rgba(244, 63, 94, 0.15)',
+                      color: NEON_PURPLE,
+                      background: 'rgba(191, 0, 255, 0.06)',
+                      border: '1px solid rgba(191, 0, 255, 0.15)',
                       textDecoration: 'none',
                       transition: 'all 0.3s',
                     }}
                     onMouseEnter={e => {
-                      e.currentTarget.style.boxShadow = '0 0 15px rgba(244, 63, 94, 0.15)';
-                      e.currentTarget.style.borderColor = 'rgba(244, 63, 94, 0.3)';
+                      e.currentTarget.style.boxShadow = '0 0 15px rgba(191, 0, 255, 0.15)';
+                      e.currentTarget.style.borderColor = 'rgba(191, 0, 255, 0.3)';
                     }}
                     onMouseLeave={e => {
                       e.currentTarget.style.boxShadow = 'none';
-                      e.currentTarget.style.borderColor = 'rgba(244, 63, 94, 0.15)';
+                      e.currentTarget.style.borderColor = 'rgba(191, 0, 255, 0.15)';
                     }}
                   >
                     {label}
@@ -370,10 +370,10 @@ const Contact = () => {
                     padding: '2px 8px',
                     borderRadius: 999,
                     background: formData.message.length >= 10
-                      ? 'rgba(244, 63, 94, 0.1)'
+                      ? 'rgba(191, 0, 255, 0.1)'
                       : 'rgba(255, 255, 255, 0.05)',
                     color: formData.message.length >= 10
-                      ? ROSE
+                      ? NEON_PURPLE
                       : 'var(--text-muted)',
                   }}>
                     {formData.message.length >= 10 ? `✓ ${formData.message.length}` : `${formData.message.length}/10`}

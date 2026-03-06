@@ -254,12 +254,55 @@ const About = () => {
           {/* Right — image + stats */}
           <div ref={imageRef} style={{ opacity: 0 }}>
             <div style={{ position: 'relative' }}>
-              {/* Image */}
+
+              {/* --- Decorative Tech Frame Behind Image --- */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                border: `1px dashed rgba(139, 92, 246, 0.3)`,
+                borderRadius: 20,
+                transform: 'translate(16px, 16px)',
+                zIndex: 0,
+                pointerEvents: 'none',
+              }} />
+
+              {/* Decorative Floating SVG Corner (Top Right) */}
+              <svg style={{ position: 'absolute', top: -12, right: -12, width: 30, height: 30, opacity: 0.6, zIndex: 2 }} viewBox="0 0 30 30" fill="none">
+                <path d="M30 0 H15 V2 H28 V15 H30 V0 Z" fill={VIOLET} />
+              </svg>
+
+              {/* Decorative Floating SVG Corner (Bottom Left) */}
+              <svg style={{ position: 'absolute', bottom: -12, left: -12, width: 30, height: 30, opacity: 0.6, zIndex: 2 }} viewBox="0 0 30 30" fill="none">
+                <path d="M0 30 H15 V28 H2 V15 H0 V30 Z" fill={VIOLET} />
+              </svg>
+
+              {/* Floating Code Badge */}
+              <div style={{
+                position: 'absolute',
+                top: 30,
+                left: -20,
+                background: 'rgba(10,10,10,0.85)',
+                backdropFilter: 'blur(8px)',
+                padding: '6px 14px',
+                borderRadius: 8,
+                border: '1px solid rgba(139, 92, 246, 0.2)',
+                boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
+                zIndex: 3,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+              }}>
+                <div style={{ width: 6, height: 6, borderRadius: '50%', background: VIOLET, boxShadow: `0 0 8px ${VIOLET}` }} />
+                <span className="font-mono" style={{ fontSize: '0.75rem', color: VIOLET, letterSpacing: '0.05em' }}>_active</span>
+              </div>
+
+              {/* Image Container */}
               <div style={{
                 borderRadius: 20,
                 overflow: 'hidden',
                 border: '1px solid var(--border-subtle)',
                 position: 'relative',
+                zIndex: 1,
               }}>
                 <img
                   src={about.image}
