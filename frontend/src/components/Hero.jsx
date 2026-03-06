@@ -147,33 +147,39 @@ const Hero = () => {
         <div className="dot-grid" style={{ position: 'absolute', inset: 0 }} />
 
         {/* ═══ Gradient Mesh Blobs ═══ */}
-        <div data-mesh-blob="" style={{
-          position: 'absolute', top: '10%', left: '10%',
-          width: 600, height: 600,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(191, 0, 255, 0.08) 0%, rgba(191, 0, 255, 0.02) 40%, transparent 60%)',
-          animation: 'meshDrift1 15s ease-in-out infinite',
-          pointerEvents: 'none',
-          willChange: 'transform',
-        }} />
-        <div data-mesh-blob="" style={{
-          position: 'absolute', bottom: '5%', right: '5%',
-          width: 500, height: 500,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.07) 0%, rgba(168, 85, 247, 0.02) 40%, transparent 60%)',
-          animation: 'meshDrift2 18s ease-in-out infinite',
-          pointerEvents: 'none',
-          willChange: 'transform',
-        }} />
-        <div data-mesh-blob="" style={{
-          position: 'absolute', top: '40%', left: '50%',
-          width: 400, height: 400,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(217, 70, 239, 0.06) 0%, transparent 60%)',
-          animation: 'meshDrift3 12s ease-in-out infinite',
-          pointerEvents: 'none',
-          willChange: 'transform',
-        }} />
+        {!isMobile && (
+          <div data-mesh-blob="" style={{
+            position: 'absolute', top: '10%', left: '10%',
+            width: 600, height: 600,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(191, 0, 255, 0.08) 0%, rgba(191, 0, 255, 0.02) 40%, transparent 60%)',
+            animation: 'meshDrift1 15s ease-in-out infinite',
+            pointerEvents: 'none',
+            willChange: 'transform',
+          }} />
+        )}
+        {!isMobile && (
+          <div data-mesh-blob="" style={{
+            position: 'absolute', bottom: '5%', right: '5%',
+            width: 500, height: 500,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.07) 0%, rgba(168, 85, 247, 0.02) 40%, transparent 60%)',
+            animation: 'meshDrift2 18s ease-in-out infinite',
+            pointerEvents: 'none',
+            willChange: 'transform',
+          }} />
+        )}
+        {!isMobile && (
+          <div data-mesh-blob="" style={{
+            position: 'absolute', top: '40%', left: '50%',
+            width: 400, height: 400,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(217, 70, 239, 0.06) 0%, transparent 60%)',
+            animation: 'meshDrift3 12s ease-in-out infinite',
+            pointerEvents: 'none',
+            willChange: 'transform',
+          }} />
+        )}
 
         {/* Noise texture overlay */}
         <div className="noise-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />

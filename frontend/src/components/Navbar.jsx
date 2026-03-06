@@ -26,9 +26,11 @@ const Navbar = () => {
     if (!isMobile) setIsMobileMenuOpen(false);
   }, [isMobile]);
 
-  // Scroll direction detection & progress
+  // Scroll direction detection & progress optimized with requestAnimationFrame
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateScroll = () => {
       const currentY = window.scrollY;
       setIsScrolled(currentY > 50);
 
@@ -44,10 +46,20 @@ const Navbar = () => {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       const progress = totalScroll > 0 ? (currentY / totalScroll) * 100 : 0;
       setScrollProgress(progress);
+
+      ticking = false;
     };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScroll);
+        ticking = true;
+      }
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     // Trigger once on mount
-    handleScroll();
+    updateScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -109,10 +121,11 @@ const Navbar = () => {
         right: 0,
         zIndex: 50,
         transition: 'background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s',
-        background: isScrolled || isMobileMenuOpen ? 'rgba(10, 10, 10, 0.85)' : 'transparent',
-        backdropFilter: isScrolled || isMobileMenuOpen ? 'blur(20px) saturate(180%)' : 'none',
-        WebkitBackdropFilter: isScrolled || isMobileMenuOpen ? 'blur(20px) saturate(180%)' : 'none',
+        background: isScrolled || isMobileMenuOpen ? (isMobile ? 'rgba(10, 10, 10, 0.95)' : 'rgba(10, 10, 10, 0.85)') : 'transparent',
+        backdropFilter: isScrolled || isMobileMenuOpen ? (isMobile ? 'blur(8px) saturate(150%)' : 'blur(20px) saturate(180%)') : 'none',
+        WebkitBackdropFilter: isScrolled || isMobileMenuOpen ? (isMobile ? 'blur(8px) saturate(150%)' : 'blur(20px) saturate(180%)') : 'none',
         borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+        willChange: 'transform, background-color',
       }}>
       {/* Global Scroll Progress Bar */}
       <div style={{

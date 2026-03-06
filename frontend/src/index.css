@@ -510,16 +510,14 @@ body>div:last-child:not(#root):not(.App) {
 }
 
 @keyframes meshDrift3 {
-  0% {
-    transform: translate(0, 0) scale(1.05);
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
   }
 
   50% {
-    transform: translate(30px, 40px) scale(0.9);
-  }
-
-  100% {
-    transform: translate(0, 0) scale(1.05);
+    transform: translate(-3vw, 4vh) scale(1.1) rotate(-10deg);
   }
 }
 
@@ -529,13 +527,22 @@ body>div:last-child:not(#root):not(.App) {
 
 .card-glass {
   background: rgba(20, 20, 20, 0.55);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+}
+
+/* Reduced blur on smaller screens to massively improve scroll performance */
+@media (max-width: 768px) {
+  .card-glass {
+    backdrop-filter: blur(4px) saturate(160%);
+    -webkit-backdrop-filter: blur(4px) saturate(160%);
+    background: rgba(20, 20, 20, 0.7);
+  }
 }
 
 .card-glass::before {
