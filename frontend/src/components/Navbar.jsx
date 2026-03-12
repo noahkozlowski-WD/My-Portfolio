@@ -33,12 +33,9 @@ const Navbar = () => {
       const currentY = window.scrollY;
       setIsScrolled(currentY > 50);
 
-      // Hide/Show navbar logic
-      if (currentY > lastScrollY.current && currentY > 200) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
+      // The Navbar is sticky and visible at all times
+      setHidden(false);
+
       lastScrollY.current = currentY;
 
       // Extreme mobile optimization: Bypass React State to update width directly

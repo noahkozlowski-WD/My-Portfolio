@@ -38,14 +38,14 @@ const Contact = () => {
     const ctx = gsap.context(() => {
       gsap.fromTo(headerRef.current, { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 0.8,
-        scrollTrigger: { trigger: headerRef.current, start: 'top 85%' },
+        scrollTrigger: { trigger: headerRef.current, start: 'top 100%' },
       });
 
       const columns = contentRef.current?.children;
       if (columns) {
         gsap.fromTo(columns, { opacity: 0, y: 40 }, {
-          opacity: 1, y: 0, duration: 0.8, stagger: 0.2,
-          scrollTrigger: { trigger: contentRef.current, start: 'top 80%' },
+          opacity: 1, y: 0, duration: 0.4, stagger: 0.1,
+          scrollTrigger: { trigger: contentRef.current, start: 'top 100%' },
         });
       }
     }, sectionRef);

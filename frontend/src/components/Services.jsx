@@ -106,15 +106,15 @@ const Services = () => {
     const ctx = gsap.context(() => {
       gsap.fromTo(headerRef.current, { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 0.8,
-        scrollTrigger: { trigger: headerRef.current, start: 'top 85%' },
+        scrollTrigger: { trigger: headerRef.current, start: 'top 100%' },
       });
 
       const cards = gridRef.current?.children;
       if (cards) {
         gsap.fromTo(cards, { opacity: 0, y: 80, scale: 0.9 }, {
-          opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.15,
+          opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.05,
           ease: 'power3.out',
-          scrollTrigger: { trigger: gridRef.current, start: 'top 80%' },
+          scrollTrigger: { trigger: gridRef.current, start: 'top 100%' },
         });
       }
 

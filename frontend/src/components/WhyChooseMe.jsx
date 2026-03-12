@@ -43,15 +43,15 @@ const WhyChooseMe = () => {
     const ctx = gsap.context(() => {
       gsap.fromTo(headerRef.current, { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 0.8,
-        scrollTrigger: { trigger: headerRef.current, start: 'top 85%' },
+        scrollTrigger: { trigger: headerRef.current, start: 'top 100%' },
       });
 
       const cards = gridRef.current?.children;
       if (cards) {
         gsap.fromTo(cards, { opacity: 0, y: 60, scale: 0.95 }, {
-          opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.12,
+          opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.05,
           ease: 'power3.out',
-          scrollTrigger: { trigger: gridRef.current, start: 'top 80%' },
+          scrollTrigger: { trigger: gridRef.current, start: 'top 100%' },
         });
       }
 
@@ -66,6 +66,7 @@ const WhyChooseMe = () => {
             start: 'top bottom',
             end: 'bottom top',
             scrub: 1,
+            fastScrollEnd: true,
           },
         });
       }
@@ -169,10 +170,10 @@ const WhyChooseMe = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  background: 'linear-gradient(135deg, rgba(191, 0, 255, 0.12), rgba(168, 85, 247, 0.12))',
-                  border: '1px solid rgba(191, 0, 255, 0.15)',
+                  background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(168, 85, 247, 0.12))',
+                  border: '1px solid rgba(168, 85, 247, 0.15)',
                 }}>
-                  <IconComponent size={isMobile ? 18 : 22} style={{ color: 'var(--accent-primary)' }} />
+                  <IconComponent size={isMobile ? 18 : 22} style={{ color: 'var(--accent-why)' }} />
                 </div>
 
                 {/* Title */}
@@ -200,13 +201,13 @@ const WhyChooseMe = () => {
                   gap: 10,
                   padding: isMobile ? '8px 12px' : '10px 14px',
                   borderRadius: 10,
-                  background: 'rgba(191, 0, 255, 0.04)',
-                  borderLeft: '3px solid var(--accent-primary)',
+                  background: 'rgba(168, 85, 247, 0.04)',
+                  borderLeft: '3px solid var(--accent-why)',
                 }}>
                   <svg
                     width="16" height="16"
                     viewBox="0 0 20 20"
-                    fill="var(--accent-primary)"
+                    fill="var(--accent-why)"
                     style={{ flexShrink: 0 }}
                   >
                     <path
@@ -218,7 +219,7 @@ const WhyChooseMe = () => {
                   <p className="font-body" style={{
                     fontSize: isMobile ? '0.75rem' : '0.8rem',
                     fontWeight: 600,
-                    color: 'var(--accent-primary)',
+                    color: 'var(--accent-why)',
                     lineHeight: 1.4,
                   }}>
                     {reason.highlight}

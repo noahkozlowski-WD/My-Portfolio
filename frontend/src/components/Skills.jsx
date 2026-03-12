@@ -25,15 +25,15 @@ const Skills = () => {
     const ctx = gsap.context(() => {
       gsap.fromTo(headerRef.current, { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 0.8,
-        scrollTrigger: { trigger: headerRef.current, start: 'top 85%' },
+        scrollTrigger: { trigger: headerRef.current, start: 'top 100%' },
       });
 
       const cards = cardsRef.current?.children;
       if (cards) {
         gsap.fromTo(cards, { opacity: 0, y: 60, scale: 0.95 }, {
-          opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.12,
+          opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.05,
           ease: 'power3.out',
-          scrollTrigger: { trigger: cardsRef.current, start: 'top 80%' },
+          scrollTrigger: { trigger: cardsRef.current, start: 'top 100%' },
         });
       }
     }, sectionRef);

@@ -39,34 +39,34 @@ const About = () => {
       // Header
       gsap.fromTo(headerRef.current, { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 0.8,
-        scrollTrigger: { trigger: headerRef.current, start: 'top 85%' },
+        scrollTrigger: { trigger: headerRef.current, start: 'top 100%' },
       });
 
       // Story block
       gsap.fromTo(storyRef.current, { opacity: 0, x: -40 }, {
         opacity: 1, x: 0, duration: 0.8,
-        scrollTrigger: { trigger: storyRef.current, start: 'top 80%' },
+        scrollTrigger: { trigger: storyRef.current, start: 'top 100%' },
       });
 
       // Journey block
       gsap.fromTo(journeyRef.current, { opacity: 0, x: -40 }, {
         opacity: 1, x: 0, duration: 0.8, delay: 0.2,
-        scrollTrigger: { trigger: journeyRef.current, start: 'top 80%' },
+        scrollTrigger: { trigger: journeyRef.current, start: 'top 100%' },
       });
 
       // Trait pills stagger
       const pills = traitsRef.current?.children;
       if (pills) {
         gsap.fromTo(pills, { opacity: 0, y: 20, scale: 0.9 }, {
-          opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.1,
-          scrollTrigger: { trigger: traitsRef.current, start: 'top 85%' },
+          opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.05,
+          scrollTrigger: { trigger: traitsRef.current, start: 'top 100%' },
         });
       }
 
       // Image parallax
       gsap.fromTo(imageRef.current, { opacity: 0, scale: 0.95, y: 40 }, {
         opacity: 1, scale: 1, y: 0, duration: 1,
-        scrollTrigger: { trigger: imageRef.current, start: 'top 80%' },
+        scrollTrigger: { trigger: imageRef.current, start: 'top 100%' },
       });
 
       // Stats counter animation
@@ -78,7 +78,7 @@ const About = () => {
           duration: 1.5,
           ease: 'power2.out',
           snap: { textContent: 1 },
-          scrollTrigger: { trigger: el, start: 'top 90%' },
+          scrollTrigger: { trigger: el, start: 'top 100%' },
           onUpdate: function () {
             el.textContent = Math.ceil(parseFloat(el.textContent)) + '+';
           },

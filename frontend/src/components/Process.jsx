@@ -62,7 +62,7 @@ const Process = () => {
       // Header
       gsap.fromTo(headerRef.current, { opacity: 0, y: 50 }, {
         opacity: 1, y: 0, duration: 0.8,
-        scrollTrigger: { trigger: headerRef.current, start: 'top 85%' },
+        scrollTrigger: { trigger: headerRef.current, start: 'top 100%' },
       });
 
       if (isDesktop) {
@@ -73,7 +73,7 @@ const Process = () => {
             transformOrigin: 'left center',
             scrollTrigger: {
               trigger: timelineRef.current,
-              start: 'top 75%',
+              start: 'top 100%',
               end: 'bottom 60%',
               scrub: 1,
             },
@@ -84,9 +84,9 @@ const Process = () => {
         const cards = timelineRef.current?.querySelectorAll('.process-step');
         if (cards) {
           gsap.fromTo(cards, { opacity: 0, y: 40 }, {
-            opacity: 1, y: 0, duration: 0.7, stagger: 0.12,
+            opacity: 1, y: 0, duration: 0.5, stagger: 0.1,
             ease: 'power3.out',
-            scrollTrigger: { trigger: timelineRef.current, start: 'top 75%' },
+            scrollTrigger: { trigger: timelineRef.current, start: 'top 100%' },
           });
         }
       } else {
@@ -97,7 +97,7 @@ const Process = () => {
             transformOrigin: 'top center',
             scrollTrigger: {
               trigger: timelineRef.current,
-              start: 'top 80%',
+              start: 'top 100%',
               end: 'bottom 60%',
               scrub: 1,
             },
@@ -108,9 +108,9 @@ const Process = () => {
         const cards = timelineRef.current?.querySelectorAll('.process-step');
         if (cards) {
           gsap.fromTo(cards, { opacity: 0, x: 40 }, {
-            opacity: 1, x: 0, duration: 0.7, stagger: 0.15,
+            opacity: 1, x: 0, duration: 0.5, stagger: 0.12,
             ease: 'power3.out',
-            scrollTrigger: { trigger: timelineRef.current, start: 'top 75%' },
+            scrollTrigger: { trigger: timelineRef.current, start: 'top 100%' },
           });
         }
       }
