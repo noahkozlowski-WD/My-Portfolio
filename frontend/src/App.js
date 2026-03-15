@@ -10,6 +10,7 @@ import Services from './components/Services';
 import TechDivider from './components/TechDivider';
 import Process from './components/Process';
 import WhyChooseMe from './components/WhyChooseMe';
+import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { Toaster } from './components/ui/toaster';
@@ -34,6 +35,7 @@ const PublicSite = () => (
     <TechDivider />
     <Process />
     <WhyChooseMe />
+    <Pricing />
     <Contact />
     <Footer />
   </div>
