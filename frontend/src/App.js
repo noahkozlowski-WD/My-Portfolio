@@ -11,7 +11,6 @@ import TechDivider from './components/TechDivider';
 import Process from './components/Process';
 import WhyChooseMe from './components/WhyChooseMe';
 import Pricing from './components/Pricing';
-import SectionDivider from './components/SectionDivider';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { Toaster } from './components/ui/toaster';
@@ -36,7 +35,13 @@ const PublicSite = () => (
     <TechDivider />
     <Process />
     <WhyChooseMe />
-    <SectionDivider direction="down" fillTop="var(--bg-secondary)" fillBottom="var(--bg-primary)" accent="#ff2d7c" />
+    <div style={{ position: 'relative', padding: '0', background: 'var(--bg-primary)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, padding: '48px 24px' }}>
+          <div style={{ flex: 1, maxWidth: 200, height: 1, background: 'linear-gradient(90deg, transparent, rgba(255, 45, 124, 0.3))' }} />
+          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#ff2d7c', boxShadow: '0 0 12px rgba(255, 45, 124, 0.5), 0 0 30px rgba(255, 45, 124, 0.2)' }} />
+          <div style={{ flex: 1, maxWidth: 200, height: 1, background: 'linear-gradient(90deg, rgba(255, 45, 124, 0.3), transparent)' }} />
+        </div>
+      </div>
     <Pricing />
     <Contact />
     <Footer />
