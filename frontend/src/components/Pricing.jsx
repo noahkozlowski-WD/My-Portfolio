@@ -308,7 +308,7 @@ const Pricing = () => {
         pointerEvents: 'none',
       }} />
 
-      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', position: 'relative' }}>
 
         {/* Header */}
         <div ref={headerRef} style={{ opacity: 0, textAlign: 'center', marginBottom: isMobile ? 40 : 60 }}>

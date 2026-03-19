@@ -18,6 +18,7 @@ const Navbar = () => {
     { name: 'Services', id: 'services' },
     { name: 'Process', id: 'process' },
     { name: 'Why Me', id: 'why-choose-me' },
+    { name: 'Pricing', id: 'pricing' },
   ];
 
   // Close mobile menu when resizing to desktop

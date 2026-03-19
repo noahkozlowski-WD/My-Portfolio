@@ -36,7 +36,7 @@ const PublicSite = () => (
     <Process />
     <WhyChooseMe />
     <div style={{ position: 'relative', padding: '0', background: 'var(--bg-primary)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, padding: '48px 24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, padding: '20px 24px' }}>
           <div style={{ flex: 1, maxWidth: 200, height: 1, background: 'linear-gradient(90deg, transparent, rgba(255, 45, 124, 0.3))' }} />
           <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#ff2d7c', boxShadow: '0 0 12px rgba(255, 45, 124, 0.5), 0 0 30px rgba(255, 45, 124, 0.2)' }} />
           <div style={{ flex: 1, maxWidth: 200, height: 1, background: 'linear-gradient(90deg, rgba(255, 45, 124, 0.3), transparent)' }} />
