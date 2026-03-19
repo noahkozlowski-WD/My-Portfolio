@@ -177,7 +177,7 @@ const PriceDisplay = ({ pkg, mode }) => {
           <Server size={12} style={{ color: pkg.accentColor, opacity: 0.6 }} />
           <p className="font-mono" style={{
             fontSize: '0.7rem',
-            color: 'var(--text-muted)',
+            color: 'var(--text-secondary)',
             letterSpacing: '0.04em',
           }}>
             + R{pkg.hostingFee}/mo hosting add-on
@@ -196,7 +196,7 @@ const PriceDisplay = ({ pkg, mode }) => {
           </p>
           <p className="font-mono" style={{
             fontSize: '0.62rem',
-            color: 'var(--text-muted)',
+            color: 'var(--text-secondary)',
             marginTop: 4,
             letterSpacing: '0.03em',
           }}>
@@ -453,7 +453,7 @@ const Pricing = () => {
                 </h3>
                 <p className="font-body" style={{
                   fontSize: '0.88rem',
-                  color: 'var(--text-muted)',
+                  color: 'var(--text-secondary)',
                   marginBottom: 28,
                   lineHeight: 1.5,
                 }}>
@@ -546,7 +546,7 @@ const Pricing = () => {
                         <Star size={8} style={{ color: pkg.accentColor, opacity: 0.5, flexShrink: 0 }} />
                         <span className="font-body" style={{
                           fontSize: '0.8rem',
-                          color: 'var(--text-muted)',
+                          color: 'var(--text-secondary)',
                         }}>{h}</span>
                       </li>
                     ))}
@@ -596,84 +596,6 @@ const Pricing = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Bottom Note */}
-        <div style={{
-          marginTop: isMobile ? 48 : 72,
-          textAlign: 'center',
-          padding: isMobile ? '28px 24px' : '36px 48px',
-          background: 'var(--bg-card)',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 20,
-          position: 'relative',
-          overflow: 'hidden',
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: 0, left: '50%',
-            transform: 'translateX(-50%)',
-            width: '60%', height: 1,
-            background: `linear-gradient(90deg, transparent, ${PINK}, ${MAGENTA}, transparent)`,
-          }} />
-
-          <p className="font-mono" style={{
-            fontSize: '0.7rem',
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: PINK,
-            opacity: 0.7,
-            marginBottom: 12,
-          }}>
-            Good to Know
-          </p>
-
-          <p className="font-body" style={{
-            color: 'var(--text-secondary)',
-            fontSize: isMobile ? '0.85rem' : '0.95rem',
-            lineHeight: 1.8,
-            maxWidth: 700,
-            margin: '0 auto 24px',
-          }}>
-            Every site is fully custom — no templates, ever. Monthly plans split
-            the build cost over 6 months with hosting built in. Once-off gives you
-            full ownership with optional hosting as an add-on.
-            Not sure which path?{' '}
-            <strong style={{ color: 'var(--text-primary)' }}>
-              Let's chat — the first consultation is always free.
-            </strong>
-          </p>
-
-          <a
-            href="#contact"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '14px 34px',
-              borderRadius: 13,
-              textDecoration: 'none',
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              background: `linear-gradient(135deg, ${PINK}, ${MAGENTA})`,
-              color: '#ffffff',
-              boxShadow: `0 0 24px rgba(${PINK_RGB}, 0.25)`,
-              transition: 'all 0.3s ease',
-              letterSpacing: '0.02em',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.boxShadow = `0 0 40px rgba(${PINK_RGB}, 0.45), 0 0 80px rgba(${MAGENTA_RGB}, 0.15)`;
-              e.currentTarget.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.boxShadow = `0 0 24px rgba(${PINK_RGB}, 0.25)`;
-              e.currentTarget.style.transform = 'none';
-            }}
-          >
-            Book a Free Consultation
-            <ArrowRight size={15} />
-          </a>
         </div>
       </div>
     </section>

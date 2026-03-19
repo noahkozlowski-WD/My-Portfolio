@@ -11,6 +11,7 @@ import TechDivider from './components/TechDivider';
 import Process from './components/Process';
 import WhyChooseMe from './components/WhyChooseMe';
 import Pricing from './components/Pricing';
+import SectionDivider from './components/SectionDivider';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { Toaster } from './components/ui/toaster';
@@ -35,6 +36,7 @@ const PublicSite = () => (
     <TechDivider />
     <Process />
     <WhyChooseMe />
+    <SectionDivider direction="down" fillTop="var(--bg-secondary)" fillBottom="var(--bg-primary)" accent="#ff2d7c" />
     <Pricing />
     <Contact />
     <Footer />
