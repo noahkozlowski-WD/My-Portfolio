@@ -1,4 +1,4 @@
-ï»¿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, ArrowUpRight, Github, Linkedin, Sparkles, Rocket, ChevronDown } from 'lucide-react';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -45,9 +45,9 @@ const CircuitDecor = ({ style }) => (
 
 /* ---- Reusable sub-components ---- */
 
-const CTACard = ({ contact }) => (
+const CTACard = ({ contact, isMobile }) => (
   <div style={{
-    borderRadius: 22, padding: '32px 28px',
+    borderRadius: 22, padding: isMobile ? '24px 20px' : '32px 28px',
     background: `linear-gradient(145deg, rgba(${PURPLE_RGB}, 0.08), rgba(${VIOLET_RGB}, 0.04), var(--bg-card))`,
     border: `1px solid rgba(${PURPLE_RGB}, 0.18)`,
     position: 'relative', overflow: 'hidden',
@@ -59,7 +59,7 @@ const CTACard = ({ contact }) => (
       <h3 className="font-heading" style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)' }}>Ready to Start?</h3>
     </div>
     <p className="font-body" style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.65, marginBottom: 22 }}>
-      I'm always excited to take on new challenges. First consultation is always free â€” no strings attached.
+      I'm always excited to take on new challenges. First consultation is always free — no strings attached.
     </p>
     <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
       {[
@@ -120,9 +120,9 @@ const ContactInfoCards = ({ contactItems, hoveredContact, setHoveredContact }) =
   </>
 );
 
-const ContactForm = ({ formData, handleChange, handleSubmit, isSubmitting, formFocused, setFormFocused }) => (
+const ContactForm = ({ formData, handleChange, handleSubmit, isSubmitting, formFocused, setFormFocused, isMobile }) => (
   <div style={{
-    borderRadius: 24, padding: '36px 32px',
+    borderRadius: 24, padding: isMobile ? '24px 20px' : '36px 32px',
     background: 'var(--bg-card)', border: `1px solid rgba(${PURPLE_RGB}, 0.12)`,
     alignSelf: 'start', position: 'relative', overflow: 'hidden',
   }}>
@@ -237,7 +237,7 @@ const Contact = () => {
     { icon: MapPin, label: 'Location', value: 'Durban, South Africa', href: null },
   ];
 
-  const formProps = { formData, handleChange, handleSubmit, isSubmitting, formFocused, setFormFocused };
+  const formProps = { formData, handleChange, handleSubmit, isSubmitting, formFocused, setFormFocused, isMobile };
 
   return (
     <section id="contact" ref={sectionRef} className="section-darker"
@@ -261,13 +261,13 @@ const Contact = () => {
           <p className="font-body" style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '0.9rem' : '1rem', maxWidth: 520, margin: '0 auto', lineHeight: 1.7 }}>{contact.description}</p>
         </div>
 
-        {/* Content â€” conditionally rendered layout */}
+        {/* Content — conditionally rendered layout */}
         <div ref={contentRef} style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? 20 : 36 }}>
 
           {isMobile ? (
             <>
               {/* MOBILE: CTA -> Form -> Contact Cards */}
-              <CTACard contact={contact} />
+              <CTACard contact={contact} isMobile={isMobile} />
               <ContactForm {...formProps} />
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <ContactInfoCards contactItems={contactItems} hoveredContact={hoveredContact} setHoveredContact={setHoveredContact} />
@@ -278,7 +278,7 @@ const Contact = () => {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 36 }}>
               {/* Left column */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <CTACard contact={contact} />
+                <CTACard contact={contact} isMobile={isMobile} />
                 <ContactInfoCards contactItems={contactItems} hoveredContact={hoveredContact} setHoveredContact={setHoveredContact} />
               </div>
               {/* Right column */}
