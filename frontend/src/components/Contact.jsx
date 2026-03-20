@@ -124,7 +124,7 @@ const ContactForm = ({ formData, handleChange, handleSubmit, isSubmitting, formF
   <div style={{
     borderRadius: 24, padding: isMobile ? '24px 20px' : '36px 32px',
     background: 'var(--bg-card)', border: `1px solid rgba(${PURPLE_RGB}, 0.12)`,
-    alignSelf: 'start', position: 'relative', overflow: 'hidden',
+    alignSelf: isMobile ? 'stretch' : 'start', position: 'relative', overflow: 'hidden',
   }}>
     <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: 1, background: `linear-gradient(90deg, transparent, rgba(${PURPLE_RGB}, 0.4), transparent)` }} />
     <CircuitDecor style={{ top: -10, right: -10, opacity: 0.03 }} />
