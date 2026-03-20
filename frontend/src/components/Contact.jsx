@@ -24,8 +24,8 @@ const API = `${BACKEND_URL}/api`;
 
 const PROJECT_OPTIONS = [
   { value: '', label: 'Not sure yet' },
-  { value: 'launchpad', label: 'LaunchPad — R3,500' },
-  { value: 'ascend', label: 'Ascend — R6,500' },
+  { value: 'launchpad', label: 'LaunchPad \u2014 R3,500' },
+  { value: 'ascend', label: 'Ascend \u2014 R6,500' },
 ];
 
 /* Decorative circuit SVG */
@@ -67,7 +67,6 @@ const Contact = () => {
         const project = params.get('project');
         if (project && ['launchpad', 'ascend'].includes(project.toLowerCase())) {
           setFormData(prev => ({ ...prev, project: project.toLowerCase() }));
-          // Scroll to the contact section
           setTimeout(() => {
             const el = document.getElementById('contact');
             if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -75,7 +74,6 @@ const Contact = () => {
         }
       }
     };
-
     readProjectFromHash();
     window.addEventListener('hashchange', readProjectFromHash);
     return () => window.removeEventListener('hashchange', readProjectFromHash);
@@ -87,31 +85,24 @@ const Contact = () => {
         opacity: 1, y: 0, duration: 0.8,
         scrollTrigger: { trigger: headerRef.current, start: 'top 90%' },
       });
-
       const columns = contentRef.current?.children;
       if (columns) {
         gsap.fromTo(columns, { opacity: 0, y: 60, scale: 0.95 }, {
-          opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.12,
-          ease: 'power3.out',
+          opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.12, ease: 'power3.out',
           scrollTrigger: { trigger: contentRef.current, start: 'top 90%' },
         });
       }
-
       const orb = sectionRef.current?.querySelector('[data-contact-orb]');
       if (orb) {
-        gsap.to(orb, {
-          y: -60, ease: 'none',
+        gsap.to(orb, { y: -60, ease: 'none',
           scrollTrigger: { trigger: sectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 1.2 },
         });
       }
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -125,12 +116,7 @@ const Contact = () => {
       setIsSubmitting(false); return;
     }
     try {
-      const dataToSend = {
-        name: formData.name.trim(),
-        email: formData.email.trim(),
-        message: formData.message.trim(),
-        project: formData.project || null,
-      };
+      const dataToSend = { name: formData.name.trim(), email: formData.email.trim(), message: formData.message.trim(), project: formData.project || null };
       const response = await axios.post(`${API}/contact`, dataToSend);
       if (response.data.success) {
         toast({ title: 'Success!', description: response.data.message, duration: 3000 });
@@ -148,37 +134,22 @@ const Contact = () => {
     { icon: MapPin, label: 'Location', value: 'Durban, South Africa', href: null },
   ];
 
-  const selectedProjectLabel = PROJECT_OPTIONS.find(o => o.value === formData.project)?.label || 'Select a package';
-
   return (
-    <section
-      id="contact"
-      ref={sectionRef}
-      className="section-darker"
-      style={{
-        padding: isMobile ? '80px 0 100px' : '120px 0 140px',
-        overflow: 'hidden',
-        position: 'relative',
-        ...sectionAccentStyle,
-      }}
-    >
+    <section id="contact" ref={sectionRef} className="section-darker"
+      style={{ padding: isMobile ? '80px 0 100px' : '120px 0 140px', overflow: 'hidden', position: 'relative', ...sectionAccentStyle }}>
+
       {/* Background orbs */}
-      {!isMobile && (
+      {!isMobile && (<>
         <div data-contact-orb="" style={{
-          position: 'absolute', top: '5%', left: '-6%',
-          width: 500, height: 500, borderRadius: '50%',
+          position: 'absolute', top: '5%', left: '-6%', width: 500, height: 500, borderRadius: '50%',
           background: `radial-gradient(circle, rgba(${PURPLE_RGB}, 0.06) 0%, rgba(${VIOLET_RGB}, 0.03) 40%, transparent 65%)`,
           pointerEvents: 'none', willChange: 'transform',
         }} />
-      )}
-      {!isMobile && (
         <div style={{
-          position: 'absolute', bottom: '10%', right: '-4%',
-          width: 350, height: 350, borderRadius: '50%',
-          background: `radial-gradient(circle, rgba(${VIOLET_RGB}, 0.04) 0%, transparent 60%)`,
-          pointerEvents: 'none',
+          position: 'absolute', bottom: '10%', right: '-4%', width: 350, height: 350, borderRadius: '50%',
+          background: `radial-gradient(circle, rgba(${VIOLET_RGB}, 0.04) 0%, transparent 60%)`, pointerEvents: 'none',
         }} />
-      )}
+      </>)}
 
       {/* Grid pattern */}
       <div style={{
@@ -191,346 +162,214 @@ const Contact = () => {
 
         {/* Header */}
         <div ref={headerRef} style={{ opacity: 0, textAlign: 'center', marginBottom: isMobile ? 40 : 64 }}>
-          <p className="font-mono" style={{
-            color: NEON_PURPLE, fontSize: '0.8rem', fontWeight: 500,
-            letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12,
-          }}>
+          <p className="font-mono" style={{ color: NEON_PURPLE, fontSize: '0.8rem', fontWeight: 500, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>
             {'// '}Get In Touch
           </p>
-          <h2 className="font-heading" style={{
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 700,
-            letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 16,
-          }}>
+          <h2 className="font-heading" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 16 }}>
             <span style={{ color: 'var(--text-primary)' }}>Let's Build </span>
-            <span style={{
-              background: `linear-gradient(135deg, ${NEON_PURPLE}, #d946ef)`,
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            }}>Something Great</span>
+            <span style={{ background: `linear-gradient(135deg, ${NEON_PURPLE}, #d946ef)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Something Great</span>
           </h2>
-          <p className="font-body" style={{
-            color: 'var(--text-secondary)', fontSize: isMobile ? '0.9rem' : '1rem',
-            maxWidth: 520, margin: '0 auto', lineHeight: 1.7,
-          }}>
+          <p className="font-body" style={{ color: 'var(--text-secondary)', fontSize: isMobile ? '0.9rem' : '1rem', maxWidth: 520, margin: '0 auto', lineHeight: 1.7 }}>
             {contact.description}
           </p>
         </div>
 
-        {/* Content area */}
+        {/* Two-column layout on desktop, single column on mobile with reordering */}
         <div ref={contentRef} style={{
-          display: 'flex', flexDirection: 'column', gap: isMobile ? 24 : 36,
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1.2fr',
+          gap: isMobile ? 20 : 36,
         }}>
 
-          {/* 1. Ready to Start CTA card — full width */}
+          {/* ═══ LEFT COLUMN (desktop) ═══ */}
           <div style={{
-            borderRadius: 22, padding: isMobile ? '28px 24px' : '36px 40px',
-            background: `linear-gradient(145deg, rgba(${PURPLE_RGB}, 0.08), rgba(${VIOLET_RGB}, 0.04), var(--bg-card))`,
-            border: `1px solid rgba(${PURPLE_RGB}, 0.18)`,
-            position: 'relative', overflow: 'hidden',
-            display: 'flex', flexDirection: isMobile ? 'column' : 'row',
-            alignItems: isMobile ? 'flex-start' : 'center',
-            justifyContent: 'space-between', gap: 24,
+            display: 'flex', flexDirection: 'column', gap: 20,
+            order: isMobile ? 2 : 0,
           }}>
-            {/* Top glow line */}
-            <div style={{
-              position: 'absolute', top: 0, left: 0, right: 0, height: 2,
-              background: `linear-gradient(90deg, transparent, ${NEON_PURPLE}, ${VIOLET}, transparent)`,
-            }} />
-            <CircuitDecor style={{ bottom: -20, right: -20 }} />
 
-            <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+            {/* CTA + Social card */}
+            <div style={{
+              borderRadius: 22, padding: isMobile ? '28px 24px' : '32px 28px',
+              background: `linear-gradient(145deg, rgba(${PURPLE_RGB}, 0.08), rgba(${VIOLET_RGB}, 0.04), var(--bg-card))`,
+              border: `1px solid rgba(${PURPLE_RGB}, 0.18)`,
+              position: 'relative', overflow: 'hidden',
+              order: isMobile ? 2 : 0,
+            }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg, transparent, ${NEON_PURPLE}, ${VIOLET}, transparent)` }} />
+              <CircuitDecor style={{ bottom: -20, right: -20 }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
                 <Sparkles size={18} style={{ color: NEON_PURPLE }} />
-                <h3 className="font-heading" style={{
-                  fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)',
-                }}>Ready to Start?</h3>
+                <h3 className="font-heading" style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)' }}>Ready to Start?</h3>
               </div>
-              <p className="font-body" style={{
-                color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.65,
-              }}>
+              <p className="font-body" style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.65, marginBottom: 22 }}>
                 I'm always excited to take on new challenges. First consultation is always free — no strings attached.
               </p>
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                {[
+                  { href: contact.social.github, icon: Github, label: 'GitHub' },
+                  { href: contact.social.linkedin, icon: Linkedin, label: 'LinkedIn' },
+                ].map(({ href, icon: SIcon, label }) => (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="font-mono"
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 8, padding: '10px 18px', borderRadius: 12,
+                      fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em', color: NEON_PURPLE,
+                      background: `rgba(${PURPLE_RGB}, 0.06)`, border: `1px solid rgba(${PURPLE_RGB}, 0.15)`,
+                      textDecoration: 'none', transition: 'all 0.3s',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.boxShadow = `0 0 20px rgba(${PURPLE_RGB}, 0.2)`; e.currentTarget.style.borderColor = `rgba(${PURPLE_RGB}, 0.35)`; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = `rgba(${PURPLE_RGB}, 0.15)`; e.currentTarget.style.transform = 'none'; }}
+                  >
+                    <SIcon size={14} />{label}
+                  </a>
+                ))}
+              </div>
             </div>
 
-            <div style={{ display: 'flex', gap: 10, flexShrink: 0, flexWrap: 'wrap' }}>
-              {[
-                { href: contact.social.github, icon: Github, label: 'GitHub' },
-                { href: contact.social.linkedin, icon: Linkedin, label: 'LinkedIn' },
-              ].map(({ href, icon: SIcon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono"
+            {/* Contact info cards */}
+            {contactItems.map(({ icon: Icon, label, value, href }, idx) => {
+              const isHovered = hoveredContact === idx;
+              return (
+                <div key={label}
+                  onMouseEnter={() => setHoveredContact(idx)}
+                  onMouseLeave={() => setHoveredContact(null)}
                   style={{
-                    display: 'flex', alignItems: 'center', gap: 8,
-                    padding: '10px 18px', borderRadius: 12,
-                    fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em',
-                    color: NEON_PURPLE,
-                    background: `rgba(${PURPLE_RGB}, 0.06)`,
-                    border: `1px solid rgba(${PURPLE_RGB}, 0.15)`,
-                    textDecoration: 'none', transition: 'all 0.3s',
+                    display: 'flex', alignItems: 'center', gap: 16, padding: '20px 24px', borderRadius: 18,
+                    background: isHovered ? `linear-gradient(135deg, rgba(${PURPLE_RGB}, 0.08), rgba(${VIOLET_RGB}, 0.04))` : 'var(--bg-card)',
+                    border: `1px solid ${isHovered ? `rgba(${PURPLE_RGB}, 0.3)` : 'var(--border-subtle)'}`,
+                    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                    boxShadow: isHovered ? `0 0 30px rgba(${PURPLE_RGB}, 0.1)` : 'none',
+                    transform: isHovered ? 'translateY(-2px)' : 'none',
+                    cursor: href ? 'pointer' : 'default',
+                    order: isMobile ? 3 : 0,
                   }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.boxShadow = `0 0 20px rgba(${PURPLE_RGB}, 0.2)`;
-                    e.currentTarget.style.borderColor = `rgba(${PURPLE_RGB}, 0.35)`;
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.boxShadow = 'none';
-                    e.currentTarget.style.borderColor = `rgba(${PURPLE_RGB}, 0.15)`;
-                    e.currentTarget.style.transform = 'none';
-                  }}
+                  onClick={() => href && window.open(href, '_self')}
                 >
-                  <SIcon size={14} />
-                  {label}
-                </a>
-              ))}
-            </div>
+                  <div style={{
+                    width: 48, height: 48, borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: `rgba(${PURPLE_RGB}, 0.08)`, border: `1px solid rgba(${PURPLE_RGB}, 0.15)`, flexShrink: 0,
+                    transition: 'all 0.3s', boxShadow: isHovered ? `0 0 16px rgba(${PURPLE_RGB}, 0.2)` : 'none',
+                  }}>
+                    <Icon size={20} style={{ color: NEON_PURPLE }} />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <p className="font-mono" style={{ fontSize: '0.63rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.12em', color: NEON_PURPLE, opacity: 0.7, marginBottom: 4 }}>{label}</p>
+                    <p className="font-body" style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', fontWeight: 500 }}>{value}</p>
+                  </div>
+                  {href && (
+                    <ArrowUpRight size={16} style={{ color: NEON_PURPLE, opacity: isHovered ? 0.8 : 0.3, transition: 'all 0.3s', transform: isHovered ? 'translate(2px, -2px)' : 'none' }} />
+                  )}
+                </div>
+              );
+            })}
           </div>
 
-          {/* 2. Form — full width */}
+          {/* ═══ RIGHT COLUMN — Form (desktop) ═══ */}
           <div style={{
-            borderRadius: 24, padding: isMobile ? '28px 24px' : '40px 36px',
-            background: 'var(--bg-card)',
-            border: `1px solid rgba(${PURPLE_RGB}, 0.12)`,
-            position: 'relative', overflow: 'hidden',
+            borderRadius: 24, padding: isMobile ? '28px 24px' : '36px 32px',
+            background: 'var(--bg-card)', border: `1px solid rgba(${PURPLE_RGB}, 0.12)`,
+            alignSelf: 'start', position: 'relative', overflow: 'hidden',
+            order: isMobile ? 1 : 0,
           }}>
-            <div style={{
-              position: 'absolute', top: 0, left: '20%', right: '20%', height: 1,
-              background: `linear-gradient(90deg, transparent, rgba(${PURPLE_RGB}, 0.4), transparent)`,
-            }} />
+            <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: 1, background: `linear-gradient(90deg, transparent, rgba(${PURPLE_RGB}, 0.4), transparent)` }} />
             <CircuitDecor style={{ top: -10, right: -10, opacity: 0.03 }} />
 
-            <h3 className="font-heading" style={{
-              fontSize: '1.3rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6,
-            }}>
+            <h3 className="font-heading" style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }}>
               Send a Message
             </h3>
-            <p className="font-body" style={{
-              color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: 28, lineHeight: 1.5,
-            }}>
+            <p className="font-body" style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: 28, lineHeight: 1.5 }}>
               Fill out the form and I'll get back to you soon
             </p>
 
-            <form onSubmit={handleSubmit} style={{
-              display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-              gap: isMobile ? 20 : 22,
-            }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
               {/* Name */}
               <div>
                 <label className="font-heading" htmlFor="name" style={{
                   display: 'block', fontSize: '0.82rem', fontWeight: 600,
-                  color: formFocused === 'name' ? NEON_PURPLE : 'var(--text-secondary)',
-                  marginBottom: 8, transition: 'color 0.3s',
+                  color: formFocused === 'name' ? NEON_PURPLE : 'var(--text-secondary)', marginBottom: 8, transition: 'color 0.3s',
                 }}>Name</label>
-                <Input
-                  id="name" name="name" type="text" required
-                  value={formData.name} onChange={handleChange}
-                  placeholder="Your name"
-                  className="input-cyber"
-                  style={{ width: '100%' }}
-                  onFocus={() => setFormFocused('name')}
-                  onBlur={() => setFormFocused(null)}
-                />
+                <Input id="name" name="name" type="text" required value={formData.name} onChange={handleChange}
+                  placeholder="Your name" className="input-cyber" style={{ width: '100%' }}
+                  onFocus={() => setFormFocused('name')} onBlur={() => setFormFocused(null)} />
               </div>
 
               {/* Email */}
               <div>
                 <label className="font-heading" htmlFor="email" style={{
                   display: 'block', fontSize: '0.82rem', fontWeight: 600,
-                  color: formFocused === 'email' ? NEON_PURPLE : 'var(--text-secondary)',
-                  marginBottom: 8, transition: 'color 0.3s',
+                  color: formFocused === 'email' ? NEON_PURPLE : 'var(--text-secondary)', marginBottom: 8, transition: 'color 0.3s',
                 }}>Email</label>
-                <Input
-                  id="email" name="email" type="email" required
-                  value={formData.email} onChange={handleChange}
-                  placeholder="your.email@example.com"
-                  className="input-cyber"
-                  style={{ width: '100%' }}
-                  onFocus={() => setFormFocused('email')}
-                  onBlur={() => setFormFocused(null)}
-                />
+                <Input id="email" name="email" type="email" required value={formData.email} onChange={handleChange}
+                  placeholder="your.email@example.com" className="input-cyber" style={{ width: '100%' }}
+                  onFocus={() => setFormFocused('email')} onBlur={() => setFormFocused(null)} />
               </div>
 
-              {/* Project selector — full width */}
-              <div style={{ gridColumn: isMobile ? '1' : '1 / -1' }}>
+              {/* Project selector */}
+              <div>
                 <label className="font-heading" htmlFor="project" style={{
-                  display: 'flex', alignItems: 'center', gap: 8,
-                  fontSize: '0.82rem', fontWeight: 600,
-                  color: formFocused === 'project' ? NEON_PURPLE : 'var(--text-secondary)',
-                  marginBottom: 8, transition: 'color 0.3s',
+                  display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.82rem', fontWeight: 600,
+                  color: formFocused === 'project' ? NEON_PURPLE : 'var(--text-secondary)', marginBottom: 8, transition: 'color 0.3s',
                 }}>
                   <Rocket size={14} style={{ opacity: 0.7 }} />
                   Interested In
                 </label>
                 <div style={{ position: 'relative' }}>
-                  <select
-                    id="project"
-                    name="project"
-                    value={formData.project}
-                    onChange={handleChange}
-                    onFocus={() => setFormFocused('project')}
-                    onBlur={() => setFormFocused(null)}
+                  <select id="project" name="project" value={formData.project} onChange={handleChange}
+                    onFocus={() => setFormFocused('project')} onBlur={() => setFormFocused(null)}
                     style={{
-                      width: '100%',
-                      padding: '12px 44px 12px 16px',
-                      borderRadius: 12,
+                      width: '100%', padding: '12px 44px 12px 16px', borderRadius: 12,
                       border: `1px solid ${formFocused === 'project' ? `rgba(${PURPLE_RGB}, 0.4)` : 'var(--border-subtle)'}`,
-                      background: 'rgba(255, 255, 255, 0.02)',
-                      color: formData.project ? 'var(--text-primary)' : 'var(--text-muted)',
-                      fontSize: '0.9rem',
-                      fontFamily: "'Inter', sans-serif",
-                      cursor: 'pointer',
-                      outline: 'none',
-                      appearance: 'none',
-                      WebkitAppearance: 'none',
-                      transition: 'all 0.3s',
+                      background: 'rgba(255, 255, 255, 0.02)', color: formData.project ? 'var(--text-primary)' : 'var(--text-muted)',
+                      fontSize: '0.9rem', fontFamily: "'Inter', sans-serif", cursor: 'pointer', outline: 'none',
+                      appearance: 'none', WebkitAppearance: 'none', transition: 'all 0.3s',
                       boxShadow: formFocused === 'project' ? `0 0 16px rgba(${PURPLE_RGB}, 0.12)` : 'none',
-                    }}
-                  >
+                    }}>
                     {PROJECT_OPTIONS.map(opt => (
-                      <option key={opt.value} value={opt.value} style={{
-                        background: '#1a1a2e', color: '#e2e8f0',
-                      }}>
-                        {opt.label}
-                      </option>
+                      <option key={opt.value} value={opt.value} style={{ background: '#1a1a2e', color: '#e2e8f0' }}>{opt.label}</option>
                     ))}
                   </select>
                   <ChevronDown size={16} style={{
-                    position: 'absolute', right: 16, top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: formFocused === 'project' ? NEON_PURPLE : 'var(--text-muted)',
-                    pointerEvents: 'none', transition: 'color 0.3s',
+                    position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)',
+                    color: formFocused === 'project' ? NEON_PURPLE : 'var(--text-muted)', pointerEvents: 'none', transition: 'color 0.3s',
                   }} />
                 </div>
               </div>
 
-              {/* Message — full width */}
-              <div style={{ gridColumn: isMobile ? '1' : '1 / -1' }}>
+              {/* Message */}
+              <div>
                 <label className="font-heading" htmlFor="message" style={{
-                  display: 'flex', alignItems: 'center', gap: 8,
-                  fontSize: '0.82rem', fontWeight: 600,
-                  color: formFocused === 'message' ? NEON_PURPLE : 'var(--text-secondary)',
-                  marginBottom: 8, transition: 'color 0.3s',
+                  display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.82rem', fontWeight: 600,
+                  color: formFocused === 'message' ? NEON_PURPLE : 'var(--text-secondary)', marginBottom: 8, transition: 'color 0.3s',
                 }}>
                   Message
                   <span className="font-mono" style={{
                     fontSize: '0.63rem', padding: '2px 10px', borderRadius: 999,
-                    background: formData.message.length >= 10
-                      ? `rgba(${PURPLE_RGB}, 0.12)` : 'rgba(255, 255, 255, 0.04)',
-                    color: formData.message.length >= 10 ? NEON_PURPLE : 'var(--text-muted)',
-                    transition: 'all 0.3s',
+                    background: formData.message.length >= 10 ? `rgba(${PURPLE_RGB}, 0.12)` : 'rgba(255, 255, 255, 0.04)',
+                    color: formData.message.length >= 10 ? NEON_PURPLE : 'var(--text-muted)', transition: 'all 0.3s',
                   }}>
                     {formData.message.length >= 10 ? `${String.fromCharCode(10003)} ${formData.message.length}` : `${formData.message.length}/10`}
                   </span>
                 </label>
-                <Textarea
-                  id="message" name="message" required minLength={10} maxLength={2000}
-                  value={formData.message} onChange={handleChange}
-                  placeholder="Tell me about your project..."
-                  rows={5} className="input-cyber"
-                  style={{ width: '100%', resize: 'vertical', minHeight: 120 }}
-                  onFocus={() => setFormFocused('message')}
-                  onBlur={() => setFormFocused(null)}
-                />
+                <Textarea id="message" name="message" required minLength={10} maxLength={2000}
+                  value={formData.message} onChange={handleChange} placeholder="Tell me about your project..."
+                  rows={6} className="input-cyber" style={{ width: '100%', resize: 'vertical', minHeight: 130 }}
+                  onFocus={() => setFormFocused('message')} onBlur={() => setFormFocused(null)} />
               </div>
 
-              {/* Submit — full width */}
-              <div style={{ gridColumn: isMobile ? '1' : '1 / -1' }}>
-                <button
-                  type="submit" disabled={isSubmitting}
-                  className="font-heading"
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    gap: 10, width: '100%', padding: '15px 24px',
-                    borderRadius: 14, border: 'none',
-                    fontWeight: 700, fontSize: '0.92rem', letterSpacing: '0.02em',
-                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                    opacity: isSubmitting ? 0.6 : 1,
-                    background: `linear-gradient(135deg, ${NEON_PURPLE}, #d946ef)`,
-                    color: '#ffffff',
-                    boxShadow: `0 0 24px rgba(${PURPLE_RGB}, 0.25)`,
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                  }}
-                  onMouseEnter={e => {
-                    if (!isSubmitting) {
-                      e.currentTarget.style.boxShadow = `0 0 40px rgba(${PURPLE_RGB}, 0.45), 0 0 80px rgba(${VIOLET_RGB}, 0.15)`;
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.boxShadow = `0 0 24px rgba(${PURPLE_RGB}, 0.25)`;
-                    e.currentTarget.style.transform = 'none';
-                  }}
-                >
-                  {isSubmitting ? 'Sending...' : (
-                    <>Send Message <Send size={16} /></>
-                  )}
-                </button>
-              </div>
+              {/* Submit */}
+              <button type="submit" disabled={isSubmitting} className="font-heading"
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, width: '100%', padding: '15px 24px',
+                  borderRadius: 14, border: 'none', fontWeight: 700, fontSize: '0.92rem', letterSpacing: '0.02em',
+                  cursor: isSubmitting ? 'not-allowed' : 'pointer', opacity: isSubmitting ? 0.6 : 1,
+                  background: `linear-gradient(135deg, ${NEON_PURPLE}, #d946ef)`, color: '#ffffff',
+                  boxShadow: `0 0 24px rgba(${PURPLE_RGB}, 0.25)`, transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                }}
+                onMouseEnter={e => { if (!isSubmitting) { e.currentTarget.style.boxShadow = `0 0 40px rgba(${PURPLE_RGB}, 0.45), 0 0 80px rgba(${VIOLET_RGB}, 0.15)`; e.currentTarget.style.transform = 'translateY(-2px)'; } }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = `0 0 24px rgba(${PURPLE_RGB}, 0.25)`; e.currentTarget.style.transform = 'none'; }}
+              >
+                {isSubmitting ? 'Sending...' : (<>Send Message <Send size={16} /></>)}
+              </button>
             </form>
-          </div>
-
-          {/* 3. Contact info cards — row of 3 */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-            gap: isMobile ? 12 : 20,
-          }}>
-            {contactItems.map(({ icon: Icon, label, value, href }, idx) => {
-              const isHovered = hoveredContact === idx;
-              return (
-                <div
-                  key={label}
-                  onMouseEnter={() => setHoveredContact(idx)}
-                  onMouseLeave={() => setHoveredContact(null)}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: 16,
-                    padding: '20px 24px', borderRadius: 18,
-                    background: isHovered
-                      ? `linear-gradient(135deg, rgba(${PURPLE_RGB}, 0.08), rgba(${VIOLET_RGB}, 0.04))`
-                      : 'var(--bg-card)',
-                    border: `1px solid ${isHovered ? `rgba(${PURPLE_RGB}, 0.3)` : 'var(--border-subtle)'}`,
-                    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-                    boxShadow: isHovered ? `0 0 30px rgba(${PURPLE_RGB}, 0.1)` : 'none',
-                    transform: isHovered ? 'translateY(-2px)' : 'none',
-                    cursor: href ? 'pointer' : 'default',
-                  }}
-                  onClick={() => href && window.open(href, '_self')}
-                >
-                  <div style={{
-                    width: 44, height: 44, borderRadius: 13,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    background: `rgba(${PURPLE_RGB}, 0.08)`,
-                    border: `1px solid rgba(${PURPLE_RGB}, 0.15)`,
-                    flexShrink: 0,
-                    transition: 'all 0.3s',
-                    boxShadow: isHovered ? `0 0 14px rgba(${PURPLE_RGB}, 0.2)` : 'none',
-                  }}>
-                    <Icon size={19} style={{ color: NEON_PURPLE }} />
-                  </div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p className="font-mono" style={{
-                      fontSize: '0.63rem', fontWeight: 600, textTransform: 'uppercase',
-                      letterSpacing: '0.12em', color: NEON_PURPLE, opacity: 0.7, marginBottom: 3,
-                    }}>{label}</p>
-                    <p className="font-body" style={{
-                      color: 'var(--text-secondary)', fontSize: '0.88rem', fontWeight: 500,
-                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                    }}>{value}</p>
-                  </div>
-                  {href && (
-                    <ArrowUpRight size={15} style={{
-                      color: NEON_PURPLE, opacity: isHovered ? 0.8 : 0.25, flexShrink: 0,
-                      transition: 'all 0.3s',
-                      transform: isHovered ? 'translate(2px, -2px)' : 'none',
-                    }} />
-                  )}
-                </div>
-              );
-            })}
           </div>
         </div>
       </div>
