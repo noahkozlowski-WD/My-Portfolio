@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, MapPin, Send, ArrowUpRight, Github, Linkedin, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ArrowUpRight, Github, Linkedin, Sparkles, Rocket, ChevronDown } from 'lucide-react';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { useToast } from '../hooks/use-toast';
@@ -21,6 +21,12 @@ const sectionAccentStyle = makeSectionAccent(191, 0, 255);
 
 const BACKEND_URL = 'https://backend-noah.zeabur.app';
 const API = `${BACKEND_URL}/api`;
+
+const PROJECT_OPTIONS = [
+  { value: '', label: 'Not sure yet' },
+  { value: 'launchpad', label: 'LaunchPad — R3,500' },
+  { value: 'ascend', label: 'Ascend — R6,500' },
+];
 
 /* Decorative circuit SVG */
 const CircuitDecor = ({ style }) => (
@@ -50,7 +56,30 @@ const Contact = () => {
   const [formFocused, setFormFocused] = useState(null);
   const { isMobile } = useResponsive();
 
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '', project: '' });
+
+  // Read project from URL hash on mount and on hash change
+  useEffect(() => {
+    const readProjectFromHash = () => {
+      const hash = window.location.hash;
+      if (hash.includes('?project=')) {
+        const params = new URLSearchParams(hash.split('?')[1]);
+        const project = params.get('project');
+        if (project && ['launchpad', 'ascend'].includes(project.toLowerCase())) {
+          setFormData(prev => ({ ...prev, project: project.toLowerCase() }));
+          // Scroll to the contact section
+          setTimeout(() => {
+            const el = document.getElementById('contact');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    };
+
+    readProjectFromHash();
+    window.addEventListener('hashchange', readProjectFromHash);
+    return () => window.removeEventListener('hashchange', readProjectFromHash);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -96,11 +125,16 @@ const Contact = () => {
       setIsSubmitting(false); return;
     }
     try {
-      const dataToSend = { name: formData.name.trim(), email: formData.email.trim(), message: formData.message.trim() };
+      const dataToSend = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+        project: formData.project || null,
+      };
       const response = await axios.post(`${API}/contact`, dataToSend);
       if (response.data.success) {
         toast({ title: 'Success!', description: response.data.message, duration: 3000 });
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', message: '', project: '' });
       }
     } catch (error) {
       const errorMessage = error.response?.data?.detail?.[0]?.msg || error.response?.data?.detail || 'Failed to send message. Please try again.';
@@ -114,17 +148,7 @@ const Contact = () => {
     { icon: MapPin, label: 'Location', value: 'Durban, South Africa', href: null },
   ];
 
-  const inputBaseStyle = {
-    width: '100%',
-    background: 'rgba(255, 255, 255, 0.02)',
-    border: '1px solid rgba(191, 0, 255, 0.12)',
-    borderRadius: 12,
-    padding: '12px 16px',
-    color: 'var(--text-primary)',
-    fontSize: '0.9rem',
-    transition: 'all 0.3s ease',
-    outline: 'none',
-  };
+  const selectedProjectLabel = PROJECT_OPTIONS.find(o => o.value === formData.project)?.label || 'Select a package';
 
   return (
     <section
@@ -191,17 +215,270 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Two column layout */}
+        {/* Content area */}
         <div ref={contentRef} style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1fr 1.2fr',
-          gap: isMobile ? 24 : 36,
+          display: 'flex', flexDirection: 'column', gap: isMobile ? 24 : 36,
         }}>
 
-          {/* Left — Contact Info */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          {/* 1. Ready to Start CTA card — full width */}
+          <div style={{
+            borderRadius: 22, padding: isMobile ? '28px 24px' : '36px 40px',
+            background: `linear-gradient(145deg, rgba(${PURPLE_RGB}, 0.08), rgba(${VIOLET_RGB}, 0.04), var(--bg-card))`,
+            border: `1px solid rgba(${PURPLE_RGB}, 0.18)`,
+            position: 'relative', overflow: 'hidden',
+            display: 'flex', flexDirection: isMobile ? 'column' : 'row',
+            alignItems: isMobile ? 'flex-start' : 'center',
+            justifyContent: 'space-between', gap: 24,
+          }}>
+            {/* Top glow line */}
+            <div style={{
+              position: 'absolute', top: 0, left: 0, right: 0, height: 2,
+              background: `linear-gradient(90deg, transparent, ${NEON_PURPLE}, ${VIOLET}, transparent)`,
+            }} />
+            <CircuitDecor style={{ bottom: -20, right: -20 }} />
 
-            {/* Contact cards - individual items */}
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                <Sparkles size={18} style={{ color: NEON_PURPLE }} />
+                <h3 className="font-heading" style={{
+                  fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)',
+                }}>Ready to Start?</h3>
+              </div>
+              <p className="font-body" style={{
+                color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.65,
+              }}>
+                I'm always excited to take on new challenges. First consultation is always free — no strings attached.
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', gap: 10, flexShrink: 0, flexWrap: 'wrap' }}>
+              {[
+                { href: contact.social.github, icon: Github, label: 'GitHub' },
+                { href: contact.social.linkedin, icon: Linkedin, label: 'LinkedIn' },
+              ].map(({ href, icon: SIcon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono"
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 8,
+                    padding: '10px 18px', borderRadius: 12,
+                    fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em',
+                    color: NEON_PURPLE,
+                    background: `rgba(${PURPLE_RGB}, 0.06)`,
+                    border: `1px solid rgba(${PURPLE_RGB}, 0.15)`,
+                    textDecoration: 'none', transition: 'all 0.3s',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.boxShadow = `0 0 20px rgba(${PURPLE_RGB}, 0.2)`;
+                    e.currentTarget.style.borderColor = `rgba(${PURPLE_RGB}, 0.35)`;
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.borderColor = `rgba(${PURPLE_RGB}, 0.15)`;
+                    e.currentTarget.style.transform = 'none';
+                  }}
+                >
+                  <SIcon size={14} />
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* 2. Form — full width */}
+          <div style={{
+            borderRadius: 24, padding: isMobile ? '28px 24px' : '40px 36px',
+            background: 'var(--bg-card)',
+            border: `1px solid rgba(${PURPLE_RGB}, 0.12)`,
+            position: 'relative', overflow: 'hidden',
+          }}>
+            <div style={{
+              position: 'absolute', top: 0, left: '20%', right: '20%', height: 1,
+              background: `linear-gradient(90deg, transparent, rgba(${PURPLE_RGB}, 0.4), transparent)`,
+            }} />
+            <CircuitDecor style={{ top: -10, right: -10, opacity: 0.03 }} />
+
+            <h3 className="font-heading" style={{
+              fontSize: '1.3rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6,
+            }}>
+              Send a Message
+            </h3>
+            <p className="font-body" style={{
+              color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: 28, lineHeight: 1.5,
+            }}>
+              Fill out the form and I'll get back to you soon
+            </p>
+
+            <form onSubmit={handleSubmit} style={{
+              display: 'grid',
+              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+              gap: isMobile ? 20 : 22,
+            }}>
+              {/* Name */}
+              <div>
+                <label className="font-heading" htmlFor="name" style={{
+                  display: 'block', fontSize: '0.82rem', fontWeight: 600,
+                  color: formFocused === 'name' ? NEON_PURPLE : 'var(--text-secondary)',
+                  marginBottom: 8, transition: 'color 0.3s',
+                }}>Name</label>
+                <Input
+                  id="name" name="name" type="text" required
+                  value={formData.name} onChange={handleChange}
+                  placeholder="Your name"
+                  className="input-cyber"
+                  style={{ width: '100%' }}
+                  onFocus={() => setFormFocused('name')}
+                  onBlur={() => setFormFocused(null)}
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="font-heading" htmlFor="email" style={{
+                  display: 'block', fontSize: '0.82rem', fontWeight: 600,
+                  color: formFocused === 'email' ? NEON_PURPLE : 'var(--text-secondary)',
+                  marginBottom: 8, transition: 'color 0.3s',
+                }}>Email</label>
+                <Input
+                  id="email" name="email" type="email" required
+                  value={formData.email} onChange={handleChange}
+                  placeholder="your.email@example.com"
+                  className="input-cyber"
+                  style={{ width: '100%' }}
+                  onFocus={() => setFormFocused('email')}
+                  onBlur={() => setFormFocused(null)}
+                />
+              </div>
+
+              {/* Project selector — full width */}
+              <div style={{ gridColumn: isMobile ? '1' : '1 / -1' }}>
+                <label className="font-heading" htmlFor="project" style={{
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  fontSize: '0.82rem', fontWeight: 600,
+                  color: formFocused === 'project' ? NEON_PURPLE : 'var(--text-secondary)',
+                  marginBottom: 8, transition: 'color 0.3s',
+                }}>
+                  <Rocket size={14} style={{ opacity: 0.7 }} />
+                  Interested In
+                </label>
+                <div style={{ position: 'relative' }}>
+                  <select
+                    id="project"
+                    name="project"
+                    value={formData.project}
+                    onChange={handleChange}
+                    onFocus={() => setFormFocused('project')}
+                    onBlur={() => setFormFocused(null)}
+                    style={{
+                      width: '100%',
+                      padding: '12px 44px 12px 16px',
+                      borderRadius: 12,
+                      border: `1px solid ${formFocused === 'project' ? `rgba(${PURPLE_RGB}, 0.4)` : 'var(--border-subtle)'}`,
+                      background: 'rgba(255, 255, 255, 0.02)',
+                      color: formData.project ? 'var(--text-primary)' : 'var(--text-muted)',
+                      fontSize: '0.9rem',
+                      fontFamily: "'Inter', sans-serif",
+                      cursor: 'pointer',
+                      outline: 'none',
+                      appearance: 'none',
+                      WebkitAppearance: 'none',
+                      transition: 'all 0.3s',
+                      boxShadow: formFocused === 'project' ? `0 0 16px rgba(${PURPLE_RGB}, 0.12)` : 'none',
+                    }}
+                  >
+                    {PROJECT_OPTIONS.map(opt => (
+                      <option key={opt.value} value={opt.value} style={{
+                        background: '#1a1a2e', color: '#e2e8f0',
+                      }}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown size={16} style={{
+                    position: 'absolute', right: 16, top: '50%',
+                    transform: 'translateY(-50%)',
+                    color: formFocused === 'project' ? NEON_PURPLE : 'var(--text-muted)',
+                    pointerEvents: 'none', transition: 'color 0.3s',
+                  }} />
+                </div>
+              </div>
+
+              {/* Message — full width */}
+              <div style={{ gridColumn: isMobile ? '1' : '1 / -1' }}>
+                <label className="font-heading" htmlFor="message" style={{
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  fontSize: '0.82rem', fontWeight: 600,
+                  color: formFocused === 'message' ? NEON_PURPLE : 'var(--text-secondary)',
+                  marginBottom: 8, transition: 'color 0.3s',
+                }}>
+                  Message
+                  <span className="font-mono" style={{
+                    fontSize: '0.63rem', padding: '2px 10px', borderRadius: 999,
+                    background: formData.message.length >= 10
+                      ? `rgba(${PURPLE_RGB}, 0.12)` : 'rgba(255, 255, 255, 0.04)',
+                    color: formData.message.length >= 10 ? NEON_PURPLE : 'var(--text-muted)',
+                    transition: 'all 0.3s',
+                  }}>
+                    {formData.message.length >= 10 ? `${String.fromCharCode(10003)} ${formData.message.length}` : `${formData.message.length}/10`}
+                  </span>
+                </label>
+                <Textarea
+                  id="message" name="message" required minLength={10} maxLength={2000}
+                  value={formData.message} onChange={handleChange}
+                  placeholder="Tell me about your project..."
+                  rows={5} className="input-cyber"
+                  style={{ width: '100%', resize: 'vertical', minHeight: 120 }}
+                  onFocus={() => setFormFocused('message')}
+                  onBlur={() => setFormFocused(null)}
+                />
+              </div>
+
+              {/* Submit — full width */}
+              <div style={{ gridColumn: isMobile ? '1' : '1 / -1' }}>
+                <button
+                  type="submit" disabled={isSubmitting}
+                  className="font-heading"
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    gap: 10, width: '100%', padding: '15px 24px',
+                    borderRadius: 14, border: 'none',
+                    fontWeight: 700, fontSize: '0.92rem', letterSpacing: '0.02em',
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                    opacity: isSubmitting ? 0.6 : 1,
+                    background: `linear-gradient(135deg, ${NEON_PURPLE}, #d946ef)`,
+                    color: '#ffffff',
+                    boxShadow: `0 0 24px rgba(${PURPLE_RGB}, 0.25)`,
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                  onMouseEnter={e => {
+                    if (!isSubmitting) {
+                      e.currentTarget.style.boxShadow = `0 0 40px rgba(${PURPLE_RGB}, 0.45), 0 0 80px rgba(${VIOLET_RGB}, 0.15)`;
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.boxShadow = `0 0 24px rgba(${PURPLE_RGB}, 0.25)`;
+                    e.currentTarget.style.transform = 'none';
+                  }}
+                >
+                  {isSubmitting ? 'Sending...' : (
+                    <>Send Message <Send size={16} /></>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* 3. Contact info cards — row of 3 */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+            gap: isMobile ? 12 : 20,
+          }}>
             {contactItems.map(({ icon: Icon, label, value, href }, idx) => {
               const isHovered = hoveredContact === idx;
               return (
@@ -220,33 +497,33 @@ const Contact = () => {
                     boxShadow: isHovered ? `0 0 30px rgba(${PURPLE_RGB}, 0.1)` : 'none',
                     transform: isHovered ? 'translateY(-2px)' : 'none',
                     cursor: href ? 'pointer' : 'default',
-                    position: 'relative', overflow: 'hidden',
                   }}
                   onClick={() => href && window.open(href, '_self')}
                 >
                   <div style={{
-                    width: 48, height: 48, borderRadius: 14,
+                    width: 44, height: 44, borderRadius: 13,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     background: `rgba(${PURPLE_RGB}, 0.08)`,
                     border: `1px solid rgba(${PURPLE_RGB}, 0.15)`,
                     flexShrink: 0,
                     transition: 'all 0.3s',
-                    boxShadow: isHovered ? `0 0 16px rgba(${PURPLE_RGB}, 0.2)` : 'none',
+                    boxShadow: isHovered ? `0 0 14px rgba(${PURPLE_RGB}, 0.2)` : 'none',
                   }}>
-                    <Icon size={20} style={{ color: NEON_PURPLE }} />
+                    <Icon size={19} style={{ color: NEON_PURPLE }} />
                   </div>
-                  <div style={{ flex: 1 }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <p className="font-mono" style={{
                       fontSize: '0.63rem', fontWeight: 600, textTransform: 'uppercase',
-                      letterSpacing: '0.12em', color: NEON_PURPLE, opacity: 0.7, marginBottom: 4,
+                      letterSpacing: '0.12em', color: NEON_PURPLE, opacity: 0.7, marginBottom: 3,
                     }}>{label}</p>
                     <p className="font-body" style={{
-                      color: 'var(--text-secondary)', fontSize: '0.92rem', fontWeight: 500,
+                      color: 'var(--text-secondary)', fontSize: '0.88rem', fontWeight: 500,
+                      overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                     }}>{value}</p>
                   </div>
                   {href && (
-                    <ArrowUpRight size={16} style={{
-                      color: NEON_PURPLE, opacity: isHovered ? 0.8 : 0.3,
+                    <ArrowUpRight size={15} style={{
+                      color: NEON_PURPLE, opacity: isHovered ? 0.8 : 0.25, flexShrink: 0,
                       transition: 'all 0.3s',
                       transform: isHovered ? 'translate(2px, -2px)' : 'none',
                     }} />
@@ -254,189 +531,6 @@ const Contact = () => {
                 </div>
               );
             })}
-
-            {/* CTA + Social card */}
-            <div style={{
-              borderRadius: 22, padding: isMobile ? '28px 24px' : '32px 28px',
-              background: `linear-gradient(145deg, rgba(${PURPLE_RGB}, 0.08), rgba(${VIOLET_RGB}, 0.04), var(--bg-card))`,
-              border: `1px solid rgba(${PURPLE_RGB}, 0.18)`,
-              position: 'relative', overflow: 'hidden',
-            }}>
-              {/* Top glow line */}
-              <div style={{
-                position: 'absolute', top: 0, left: 0, right: 0, height: 2,
-                background: `linear-gradient(90deg, transparent, ${NEON_PURPLE}, ${VIOLET}, transparent)`,
-              }} />
-
-              <CircuitDecor style={{ bottom: -20, right: -20 }} />
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-                <Sparkles size={18} style={{ color: NEON_PURPLE }} />
-                <h3 className="font-heading" style={{
-                  fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)',
-                }}>Ready to Start?</h3>
-              </div>
-
-              <p className="font-body" style={{
-                color: 'var(--text-secondary)', fontSize: '0.88rem',
-                lineHeight: 1.65, marginBottom: 22,
-              }}>
-                I'm always excited to take on new challenges. First consultation is always free — no strings attached.
-              </p>
-
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                {[
-                  { href: contact.social.github, icon: Github, label: 'GitHub' },
-                  { href: contact.social.linkedin, icon: Linkedin, label: 'LinkedIn' },
-                ].map(({ href, icon: SIcon, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-mono"
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: 8,
-                      padding: '10px 18px', borderRadius: 12,
-                      fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.04em',
-                      color: NEON_PURPLE,
-                      background: `rgba(${PURPLE_RGB}, 0.06)`,
-                      border: `1px solid rgba(${PURPLE_RGB}, 0.15)`,
-                      textDecoration: 'none',
-                      transition: 'all 0.3s',
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.boxShadow = `0 0 20px rgba(${PURPLE_RGB}, 0.2)`;
-                      e.currentTarget.style.borderColor = `rgba(${PURPLE_RGB}, 0.35)`;
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.boxShadow = 'none';
-                      e.currentTarget.style.borderColor = `rgba(${PURPLE_RGB}, 0.15)`;
-                      e.currentTarget.style.transform = 'none';
-                    }}
-                  >
-                    <SIcon size={14} />
-                    {label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right — Form */}
-          <div style={{
-            borderRadius: 24, padding: isMobile ? '28px 24px' : '36px 32px',
-            background: 'var(--bg-card)',
-            border: `1px solid rgba(${PURPLE_RGB}, 0.12)`,
-            alignSelf: 'start',
-            position: 'relative', overflow: 'hidden',
-            transition: 'border-color 0.3s',
-          }}>
-            {/* Top accent line */}
-            <div style={{
-              position: 'absolute', top: 0, left: '20%', right: '20%', height: 1,
-              background: `linear-gradient(90deg, transparent, rgba(${PURPLE_RGB}, 0.4), transparent)`,
-            }} />
-
-            <CircuitDecor style={{ top: -10, right: -10, opacity: 0.03 }} />
-
-            <h3 className="font-heading" style={{
-              fontSize: '1.3rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6,
-            }}>
-              Send a Message
-            </h3>
-            <p className="font-body" style={{
-              color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: 28, lineHeight: 1.5,
-            }}>
-              Fill out the form and I'll get back to you soon
-            </p>
-
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
-              {[
-                { id: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
-                { id: 'email', label: 'Email', type: 'email', placeholder: 'your.email@example.com' },
-              ].map(field => (
-                <div key={field.id}>
-                  <label className="font-heading" htmlFor={field.id} style={{
-                    display: 'block', fontSize: '0.82rem', fontWeight: 600,
-                    color: formFocused === field.id ? NEON_PURPLE : 'var(--text-secondary)',
-                    marginBottom: 8, transition: 'color 0.3s',
-                  }}>
-                    {field.label}
-                  </label>
-                  <Input
-                    id={field.id} name={field.id} type={field.type} required
-                    value={formData[field.id]} onChange={handleChange}
-                    placeholder={field.placeholder}
-                    className="input-cyber"
-                    style={inputBaseStyle}
-                    onFocus={() => setFormFocused(field.id)}
-                    onBlur={() => setFormFocused(null)}
-                  />
-                </div>
-              ))}
-
-              <div>
-                <label className="font-heading" htmlFor="message" style={{
-                  display: 'flex', alignItems: 'center', gap: 8,
-                  fontSize: '0.82rem', fontWeight: 600,
-                  color: formFocused === 'message' ? NEON_PURPLE : 'var(--text-secondary)',
-                  marginBottom: 8, transition: 'color 0.3s',
-                }}>
-                  Message
-                  <span className="font-mono" style={{
-                    fontSize: '0.63rem', padding: '2px 10px', borderRadius: 999,
-                    background: formData.message.length >= 10
-                      ? `rgba(${PURPLE_RGB}, 0.12)` : 'rgba(255, 255, 255, 0.04)',
-                    color: formData.message.length >= 10 ? NEON_PURPLE : 'var(--text-muted)',
-                    transition: 'all 0.3s',
-                  }}>
-                    {formData.message.length >= 10 ? `\u2713 ${formData.message.length}` : `${formData.message.length}/10`}
-                  </span>
-                </label>
-                <Textarea
-                  id="message" name="message" required minLength={10} maxLength={2000}
-                  value={formData.message} onChange={handleChange}
-                  placeholder="Tell me about your project..."
-                  rows={6} className="input-cyber"
-                  style={{ ...inputBaseStyle, resize: 'vertical', minHeight: 130 }}
-                  onFocus={() => setFormFocused('message')}
-                  onBlur={() => setFormFocused(null)}
-                />
-              </div>
-
-              <button
-                type="submit" disabled={isSubmitting}
-                className="font-heading"
-                style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  gap: 10, width: '100%', padding: '15px 24px',
-                  borderRadius: 14, border: 'none',
-                  fontWeight: 700, fontSize: '0.92rem', letterSpacing: '0.02em',
-                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                  opacity: isSubmitting ? 0.6 : 1,
-                  background: `linear-gradient(135deg, ${NEON_PURPLE}, #d946ef)`,
-                  color: '#ffffff',
-                  boxShadow: `0 0 24px rgba(${PURPLE_RGB}, 0.25)`,
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                }}
-                onMouseEnter={e => {
-                  if (!isSubmitting) {
-                    e.currentTarget.style.boxShadow = `0 0 40px rgba(${PURPLE_RGB}, 0.45), 0 0 80px rgba(${VIOLET_RGB}, 0.15)`;
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.boxShadow = `0 0 24px rgba(${PURPLE_RGB}, 0.25)`;
-                  e.currentTarget.style.transform = 'none';
-                }}
-              >
-                {isSubmitting ? 'Sending...' : (
-                  <>Send Message <Send size={16} /></>
-                )}
-              </button>
-            </form>
           </div>
         </div>
       </div>

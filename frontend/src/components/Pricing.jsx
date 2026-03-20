@@ -555,7 +555,7 @@ const Pricing = () => {
 
                 {/* CTA */}
                 <a
-                  href="#contact"
+                  href={`#contact?project=${pkg.id}`}
                   style={{
                     display: 'flex',
                     alignItems: 'center',

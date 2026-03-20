@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, status
+﻿from fastapi import APIRouter, HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorClient
 from models.contact import ContactMessageCreate, ContactMessage
 from datetime import datetime
@@ -25,6 +25,11 @@ def get_database():
     client = AsyncIOMotorClient(mongo_url)
     return client[db_name]
 
+PROJECT_LABELS = {
+    'launchpad': 'LaunchPad',
+    'ascend': 'Ascend',
+}
+
 @router.post("", status_code=status.HTTP_201_CREATED)
 async def submit_contact_form(contact_data: ContactMessageCreate):
     """
@@ -49,14 +54,25 @@ async def submit_contact_form(contact_data: ContactMessageCreate):
 
         logger.info(f"Contact form submitted by {contact_data.email}")
 
+        # Build project row for email
+        project_label = PROJECT_LABELS.get(contact_data.project, contact_data.project) if contact_data.project else None
+        project_row = ""
+        if project_label:
+            project_row = f"""
+                                <tr>
+                                    <td style="padding: 8px 0; color: #6b7280;"><strong>Package</strong></td>
+                                    <td style="padding: 8px 0; color: #111827;">{project_label}</td>
+                                </tr>"""
+
         # Send email notification via Resend
         if resend.api_key and CONTACT_EMAIL:
             try:
+                subject_suffix = f" [{project_label}]" if project_label else ""
                 resend.Emails.send({
                     "from": "Portfolio Contact <dev@noahkozlowski.com>",
                     "to": CONTACT_EMAIL,
                     "reply_to": contact_data.email,
-                    "subject": f"New message from {contact_data.name}",
+                    "subject": f"New message from {contact_data.name}{subject_suffix}",
                     "html": f"""
                         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 8px;">
                             <h2 style="color: #111827; margin-top: 0;">New Portfolio Contact Form Submission</h2>
@@ -70,7 +86,7 @@ async def submit_contact_form(contact_data: ContactMessageCreate):
                                     <td style="padding: 8px 0;">
                                         <a href="mailto:{contact_data.email}" style="color: #2563eb;">{contact_data.email}</a>
                                     </td>
-                                </tr>
+                                </tr>{project_row}
                             </table>
                             <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 16px 0;" />
                             <p style="color: #6b7280; margin-bottom: 8px;"><strong>Message</strong></p>
@@ -84,7 +100,7 @@ async def submit_contact_form(contact_data: ContactMessageCreate):
                 })
                 logger.info(f"Email notification sent for message from {contact_data.email}")
             except Exception as email_error:
-                # Don't fail the whole request if email fails — message is already saved to DB
+                # Don't fail the whole request if email fails - message is already saved to DB
                 logger.error(f"Failed to send email notification: {str(email_error)}")
 
         return {
@@ -121,6 +137,7 @@ async def get_contact_messages():
                 "name": msg.get('name'),
                 "email": msg.get('email'),
                 "message": msg.get('message'),
+                "project": msg.get('project'),
                 "status": msg.get('status', 'new'),
                 "created_at": msg.get('created_at').isoformat() if msg.get('created_at') else None
             })
